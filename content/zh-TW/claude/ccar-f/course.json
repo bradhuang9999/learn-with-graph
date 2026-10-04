@@ -1,0 +1,15 @@
+{
+  "id": "claude/ccar-f",
+  "locale": "zh-TW",
+  "category": "Claude 認證",
+  "title": "Claude Certified Architect — Foundations",
+  "shortTitle": "CCAR-F",
+  "description": "從 Agent 架構、工具整合，到提示設計與可靠性，循序建立 Claude 系統設計能力。",
+  "chapters": [
+    { "id": "01", "title": "Agent 架構與編排", "description": "建立代理迴圈、任務拆解、交接與工作階段的設計觀。" },
+    { "id": "02", "title": "工具與 MCP 整合", "description": "設計工具介面、錯誤契約、權限與 MCP 工作流程。" },
+    { "id": "03", "title": "Claude Code 設定與工作流程", "description": "運用專案記憶、技能、路徑規則與 CI 工作流。" },
+    { "id": "04", "title": "提示設計、驗證與審查", "description": "把輸出品質轉成可驗證、可重試、可審查的流程。" },
+    { "id": "05", "title": "Context、可靠性與人工監督", "description": "處理長互動、不確定性、失敗傳播與人工覆核。" }
+  ]
+}

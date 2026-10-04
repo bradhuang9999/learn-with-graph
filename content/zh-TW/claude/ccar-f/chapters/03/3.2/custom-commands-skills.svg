@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1160" role="img" aria-label="3.2 常駐規範與按需任務的決策樹、技能執行分叉與欄位責任">
+<title>3.2 先判斷常駐還是按需，再設定技能執行邊界</title>
+<defs><marker id="a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1L9 5.5L1 10" style="fill:none;stroke:#6579a8;stroke-width:2;stroke-linejoin:round"/></marker></defs>
+<style>text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#1b344c}.title{font-size:34px;font-weight:700}.sub{font-size:18px;fill:#576b82}.st{font-size:23px;font-weight:700}.ct{font-size:21px;font-weight:700}.body{font-size:18px}.small{font-size:15px;fill:#526780}.mono{font-family:Consolas,'Microsoft JhengHei',monospace;font-size:18px}.section-bg{fill:#f5f7fb;stroke:#d5e0ec;stroke-width:2}.card-bg{fill:#fff;stroke:#b5cbe0;stroke-width:2}.blue{fill:#eaf2fa;stroke:#a6c2de;stroke-width:2}.green{fill:#e9f6ef;stroke:#87bfa2;stroke-width:2}.purple{fill:#f0ecfa;stroke:#b6a9d9;stroke-width:2}.flow-line{fill:none;stroke:#6579a8;stroke-width:3;marker-end:url(#a)}.divider{stroke:#d3dfeb;stroke-width:2}.good{fill:#257359}.accent{fill:#61539e}</style>
+<rect width="1440" height="1160" style="fill:#fff"/>
+<text x="50" y="58" class="title">3.2　規範常駐，任務按需呼叫</text>
+<text x="50" y="91" class="sub">先判斷「每次都要遵守」還是「有輸入與產物的工作」，再選指令或技能</text>
+<g id="section-decision" class="section"><rect class="section-bg" x="40" y="118" width="1360" height="355" rx="22"/><g class="section-content">
+<text x="66" y="157" class="st">選擇載體｜同一個 API 團隊的兩種需求</text>
+<g id="concept-need" class="concept-card flow-node" data-title="先辨認需求性質" data-detail="團隊提出一條要求時，先判斷它是每次 API 變更都必須遵守的持續規範，還是這次才要執行的審查任務。"><rect class="card-bg" x="66" y="215" width="252" height="140" rx="16"/><g class="card-content"><text x="88" y="258" class="ct">一條新要求</text><text x="88" y="302" class="body">規範？還是任務？</text></g></g>
+<path class="flow-line" d="M318 285H368"/>
+<g id="concept-decision" class="concept-card flow-node" data-title="是否每次都適用" data-detail="如果每次 API 變更都要遵守，放常駐指示；若有明確觸發、輸入與產物，做成按需呼叫的指令或技能。"><rect class="blue card-bg" x="368" y="215" width="275" height="140" rx="16"/><g class="card-content"><text x="390" y="258" class="ct">每次都適用？</text><text x="390" y="302" class="body">例如契約測試要求</text></g></g>
+<path class="flow-line" d="M643 255H698V229H751"/>
+<path class="flow-line" d="M643 316H698V369H751"/>
+<text x="659" y="225" class="small">是</text><text x="659" y="349" class="small">否</text>
+<g id="concept-always" class="concept-card flow-node" data-title="持續規範放 CLAUDE.md" data-detail="『API 變更須執行契約測試』是團隊持續規範，放版控的專案 CLAUDE.md 或對應路徑規則；不是每次都要手動呼叫的技能。"><rect class="green card-bg" x="751" y="185" width="623" height="101" rx="16"/><g class="card-content"><text x="775" y="226" class="ct good">常駐 → 專案 CLAUDE.md</text><text x="775" y="262" class="body">API 變更都要執行契約測試</text></g></g>
+<g id="concept-on-demand" class="concept-card flow-node" data-title="按需審查用指令或技能" data-detail="『審查這次 API 差異並回報缺陷』有觸發、輸入與產物，可用 /review-api 指令或技能按需執行；不必把長流程常駐。"><rect class="purple card-bg" x="751" y="318" width="623" height="101" rx="16"/><g class="card-content"><text x="775" y="359" class="ct accent">按需 → /review-api 指令或技能</text><text x="775" y="395" class="body">指定套件＋差異檔 → 可定位的缺陷報告</text></g></g>
+</g></g>
+<g id="section-packaging" class="section"><rect class="section-bg" x="40" y="491" width="1360" height="264" rx="22"/><g class="section-content">
+<text x="66" y="530" class="st">按需任務再選包裝：簡短入口，還是有參考檔與執行設定的流程？</text>
+<g id="concept-command" class="concept-card" data-title="自訂斜線指令" data-detail="簡短、單一任務的團隊入口可放 .claude/commands/review-api.md，檔名對應 /review-api，納入版控；個人命令放 ~/.claude/commands/。"><rect class="card-bg" x="66" y="558" width="620" height="153" rx="16"/><g class="card-content"><text x="90" y="600" class="ct">自訂指令｜簡短團隊入口</text><text x="90" y="641" class="mono">.claude/commands/review-api.md</text><text x="90" y="680" class="small">版控共享；個人變體放 ~/.claude/commands/</text></g></g>
+<g id="concept-skill" class="concept-card" data-title="技能包裝" data-detail="需要 SKILL.md、描述匹配、多檔參考資料或執行設定時，放 .claude/skills/review-api/SKILL.md；個人不同名稱的變體放 ~/.claude/skills/，避免影響隊友。"><rect class="card-bg" x="712" y="558" width="662" height="153" rx="16"/><g class="card-content"><text x="736" y="600" class="ct">技能｜可帶參考檔與執行設定</text><text x="736" y="641" class="mono">.claude/skills/review-api/SKILL.md</text><text x="736" y="680" class="small">description 說明適用任務；個人變體用不同名稱</text></g></g>
+<text x="66" y="736" class="small">兩種入口都要明定：輸入從何而來、任務範圍、產物格式、缺值與失敗時如何停止。</text>
+</g></g>
+<g id="section-fork" class="section"><rect class="section-bg" x="40" y="773" width="1360" height="348" rx="22"/><g class="section-content">
+<text x="66" y="812" class="st">技能執行｜分叉隔離的是探索上下文，不是自動帶入整段對話</text>
+<path class="flow-line" d="M367 903H411"/><path class="flow-line" d="M948 903H992"/>
+<g id="concept-main" class="concept-card flow-node" data-title="主會話交付自足輸入" data-detail="主會話傳入明確套件、差異檔與輸出契約。argument-hint 只提示填參數，正文仍須檢查缺值；若上下文未寫明，fork 的子代理不會自動知道。"><rect class="card-bg" x="66" y="848" width="301" height="117" rx="16"/><g class="card-content"><text x="89" y="888" class="ct">主會話</text><text x="89" y="925" class="body">任務＋輸入＋回傳契約</text></g></g>
+<g id="concept-fork" class="concept-card flow-node" data-title="context: fork 的隔離工作" data-detail="context: fork 在獨立子代理上下文執行大量探索；不繼承先前完整對話。allowed-tools 是當回合預先核准，不是白名單；disallowed-tools 可移除禁止工具。"><rect class="purple card-bg" x="411" y="848" width="537" height="117" rx="16"/><g class="card-content"><text x="435" y="888" class="ct accent">context: fork｜隔離探索</text><text x="435" y="925" class="body">大量搜尋與判斷留在子代理</text></g></g>
+<g id="concept-summary" class="concept-card flow-node" data-title="回傳結論並在主會話重核" data-detail="主會話只收到子代理回傳的結論與證據位置，不會得到完整探索歷史；若要修改程式，須重新核對關鍵檔案。"><rect class="green card-bg" x="992" y="848" width="382" height="117" rx="16"/><g class="card-content"><text x="1016" y="888" class="ct good">主會話收摘要</text><text x="1016" y="925" class="body">改程式前重核關鍵檔案</text></g></g>
+<path class="divider" d="M66 988H1374"/>
+<g id="concept-frontmatter" class="concept-card" data-title="frontmatter 三種不同控制" data-detail="argument-hint 僅顯示參數提示；allowed-tools 預先核准列出的工具但未列工具仍按一般權限規則；disallowed-tools 才移除禁止工具。若必須全域封鎖，使用權限拒絕規則或隔離執行環境。"><rect class="blue card-bg" x="66" y="1007" width="1308" height="81" rx="13"/><g class="card-content"><text x="90" y="1041" class="body">argument-hint＝輸入提示　｜　allowed-tools＝當回合預先核准　｜　disallowed-tools＝當回合移除工具</text><text x="90" y="1073" class="small">提示不驗參數；預先核准不是白名單；持久硬限制須另設權限拒絕或隔離。</text></g></g>
+</g></g>
+</svg>

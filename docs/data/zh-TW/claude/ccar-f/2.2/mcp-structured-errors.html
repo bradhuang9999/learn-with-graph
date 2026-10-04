@@ -1,0 +1,70 @@
+<h2>原始考綱</h2>
+<p>**Task Statement 2.2：**為 MCP 工具實作結構化錯誤回應。</p>
+<h3>知識要求</h3>
+<ul>
+<li>MCP 的 <code>isError</code> 旗標如何把工具失敗傳回 Agent。</li>
+<li>暫時性錯誤（逾時、服務不可用）、驗證錯誤（輸入無效）、業務錯誤（違反政策）與權限錯誤的區別。</li>
+<li>一律回傳「Operation failed」等通用錯誤，會讓 Agent 無法作出合適的復原決策。</li>
+<li>可重試與不可重試錯誤的差別，以及結構化中繼資料如何避免浪費重試。</li>
+</ul>
+<h3>技能要求</h3>
+<ul>
+<li>回傳結構化錯誤中繼資料，包括 <code>errorCategory</code>（暫時性／驗證／權限）、布林值 <code>isRetryable</code> 與人類可讀的說明。</li>
+<li>業務規則違反時，加入 <code>retriable: false</code> 旗標與對客戶友善的解釋，讓 Agent 能妥善溝通。</li>
+<li>讓子代理在本地復原暫時性失敗；只有無法自行解決的錯誤才連同部分結果與已嘗試的方法傳給協調者。</li>
+<li>區分需要決定是否重試的存取失敗，與查詢成功但沒有符合項目的有效空結果。</li>
+</ul>
+<h2>要點筆記</h2>
+<h3>先辨認「沒有資料」是結果還是故障</h3>
+<p>工具的「成功但沒有資料」與「查詢失敗所以沒有資料」必須是不同結果。查議題得到空清單，只能在查詢確實完成時解讀為「此範圍沒有符合項」；逾時或遭拒時回傳同樣的 <code>[]</code>，會讓代理把未知誤當成不存在。</p>
+<p>MCP 工具結果用 <code>isError: true</code> 表示<strong>工具執行失敗</strong>；原因與恢復建議放在結果內容中。<code>errorCategory</code>、<code>isRetryable</code>、<code>code</code> 等是應用程式自行約定的欄位，不是 MCP 預設的頂層欄位。連線中斷、未知工具等<strong>協定或連線層失敗</strong>，則不等同一筆有效的工具執行結果；用戶端還須另行處理。<a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools" target="_blank" rel="noopener noreferrer">MCP 工具結果規格</a>區分了這兩層。</p>
+<h3>錯誤類別決定下一步</h3>
+<table>
+<thead>
+<tr>
+<th>類別</th>
+<th>例子</th>
+<th>代理可採取的動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>暫時性錯誤</td>
+<td>逾時、短暫服務不可用</td>
+<td>在重試預算內等待後重試；有副作用的操作須先確認狀態或使用冪等鍵。</td>
+</tr>
+<tr>
+<td>驗證錯誤</td>
+<td>欄位格式錯、值超出允許範圍</td>
+<td>修正可得資料；缺少可信值時詢問，不重送相同引數。</td>
+</tr>
+<tr>
+<td>業務規則錯誤</td>
+<td>退款期限已過</td>
+<td>說明規則和允許的替代途徑，不靠重試突破規則。</td>
+</tr>
+<tr>
+<td>權限錯誤</td>
+<td>403、授權失效</td>
+<td>請求授權或交由有權者；不可回報「沒有資料」。</td>
+</tr>
+</tbody>
+</table>
+<p>通用的「Operation failed」抹掉了上述分界。錯誤回應至少要讓模型和程式辨認：<strong>穩定代碼、錯誤類別、可否重試、人類可讀原因、建議動作</strong>。需要定位問題時再加入安全的輸入脈絡與呼叫識別碼；避免把金鑰、個資或原始堆疊追蹤送進模型。把錯誤藏在成功結果的文字中，或只給 <code>failed</code> 這類模糊代碼，也會使代理走錯路。</p>
+<p><code>isRetryable: true</code> 只是候選動作，不保證重試安全；還要檢查副作用與剩餘嘗試次數。考綱以 <code>retriable: false</code> 表示業務規則違反不可重試；它描述的是同一個判斷，實作時應選定一種應用程式欄位名稱，並在各工具保持一致。下文使用 <code>isRetryable</code>。</p>
+<h3>結果契約：空、錯誤與部分完成</h3>
+<p>以下是應用程式自訂的業務錯誤範例：<code>isError</code> 屬於 MCP 工具結果，JSON 文字中的其餘欄位屬於應用程式。支援結構化內容的用戶端可另提供相應資料，但不能假設每個用戶端都會解析自訂欄位。</p>
+<pre><code class="language-json">{
+  &quot;isError&quot;: true,
+  &quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\&quot;code\&quot;:\&quot;REFUND_WINDOW_CLOSED\&quot;,\&quot;errorCategory\&quot;:\&quot;business\&quot;,\&quot;isRetryable\&quot;:false,\&quot;message\&quot;:\&quot;已超過自助退款期限。\&quot;,\&quot;nextAction\&quot;:\&quot;說明人工申請管道。\&quot;}&quot;}]
+}
+</code></pre>
+<p>成功查詢而沒有議題，才回傳 <code>isError: false</code> 和 <code>items: []</code>，最好附上查詢範圍；它不能證明其他來源也沒有議題。另以<strong>批次退款</strong>為例：A 確認退款成功、B 呼叫逾時而執行狀態未確認、C 因超過期限被拒絕。結果須逐項標出<strong>已完成、未確認與不可自助處理</strong>，不能只回「失敗」，更不能把 B 寫成「退款失敗」。部分成功沒有可免除逐項說明的魔法旗標；應用程式須設計成功項與失敗項的內容契約。</p>
+<h3>誰重試，誰接手</h3>
+<p>子代理可在職責內修復暫時性失敗，但需要三道限制：</p>
+<ol>
+<li><strong>判斷原因</strong>：只有可恢復的暫時性故障才考慮重試；驗證、政策和權限拒絕要走修正、授權或升級路徑。</li>
+<li><strong>控制副作用</strong>：讀取通常可再次查詢；退款、寫入或傳訊可能已成功只是回應遺失，應使用冪等鍵或先查交易狀態。逾時不等於「尚未執行」。</li>
+<li><strong>設出口並交接</strong>：限制次數與間隔；用盡後把已成功項、失敗項、嘗試次數、原因與呼叫識別碼交協調者，由其決定替代來源、對客說法或人工處理。不要把整批已完成部分重新執行。</li>
+</ol>
+<p>以前述三筆退款為例，B <strong>不能因逾時就直接再送一次</strong>：先以交易識別碼查明前次是否已退款，或使用同一冪等鍵確保不會重複退款；確認尚未完成且仍可恢復時，才在預算內受控重試。若仍無法確認，子代理保留 A 的成功結果與 C 的業務限制，將 B 標記「未確認」交回協調者。</p>

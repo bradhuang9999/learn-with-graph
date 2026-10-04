@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">5.5 人工審查路由與高信心抽樣</title>
+  <desc id="svg-desc">欄位級結果依來源矛盾、業務風險與經分群校準的門檻，分流至人工審查、自動放行並分層抽查，或待補標註；審查結果回饋門檻校準。</desc>
+  <style>
+    text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#193249}
+    .title{font-size:34px;font-weight:700}.subtitle{font-size:19px;fill:#526b7a}.section-bg{fill:#f4f8fb;stroke:#d5e2ea;stroke-width:2}.section-title{font-size:22px;font-weight:700}.card-bg{fill:#fff;stroke:#c8d9e2;stroke-width:2}.card-title{font-size:23px;font-weight:700}.body{font-size:19px}.small{font-size:16px;fill:#4e6474}.micro{font-size:15px;fill:#526b7a}.badge{font-size:16px;font-weight:700}.flow-line{fill:none;stroke:#758da1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.flow-line.hot{stroke:#c55749}.flow-line.good{stroke:#218375}.flow-line.amber{stroke:#b87725}.flow-line.loop{stroke:#725da7;stroke-dasharray:9 7}.concept-card:hover .card-bg{stroke:#527eaa;stroke-width:3}.divider{stroke:#d8e3e9;stroke-width:2}.flow-node{cursor:default}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#758da1"/></marker></defs>
+  <rect width="1600" height="1150" style="fill:#fff"/>
+  <text x="52" y="61" class="title">5.5　每個欄位怎麼進人工、放行與抽查？</text>
+  <text x="52" y="96" class="subtitle">以分群驗證的風險門檻決定路由；高信心仍留一條監測通道。</text>
+
+  <!-- Routing edges appear below the nodes. -->
+  <path class="flow-line" d="M342 282 H430"/>
+  <path class="flow-line" d="M342 460 H382 V417 H430"/>
+  <path class="flow-line hot" d="M750 263 H842"/>
+  <path class="flow-line hot" d="M750 373 H791 V315 H842"/>
+  <path class="flow-line good" d="M750 427 H842"/>
+  <path class="flow-line amber" d="M750 470 H789 V584 H842"/>
+  <path class="flow-line loop" d="M746 883 H790 V982 H838"/>
+
+  <g id="section-input" class="section">
+    <rect class="section-bg" x="48" y="144" width="316" height="525" rx="22"/>
+    <g class="section-content">
+      <text x="72" y="183" class="section-title">① 欄位級輸入</text>
+      <g id="concept-field-result" class="concept-card flow-node" data-title="欄位級結果" data-detail="同一文件的供應商名稱、日期、總額各有自己的擷取值與信心；不可用記錄級總分掩蓋難欄位。">
+        <rect class="card-bg" x="70" y="207" width="272" height="152" rx="16"/>
+        <g class="card-content"><text x="92" y="248" class="card-title">一欄一判斷</text><text x="92" y="286" class="body">擷取值 ＋ 信心分數</text><text x="92" y="320" class="body">＋ 來源位置</text></g>
+      </g>
+      <g id="concept-input-signals" class="concept-card" data-title="來源與風險訊號" data-detail="低信心、來源模糊或互相矛盾、欄位業務風險，都影響路由；來源矛盾是獨立送審訊號，即使模型分數很高。">
+        <rect class="card-bg" x="70" y="381" width="272" height="236" rx="16"/>
+        <g class="card-content"><text x="92" y="422" class="card-title">另外看三種信號</text><text x="92" y="467" class="body">• 分數是否偏低</text><text x="92" y="507" class="body">• 來源是否矛盾</text><text x="92" y="547" class="body">• 錯誤代價是否高</text><text x="92" y="585" class="small">高分不能抵銷來源矛盾</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-gate" class="section">
+    <rect class="section-bg" x="408" y="144" width="364" height="525" rx="22"/>
+    <g class="section-content">
+      <text x="432" y="183" class="section-title">② 分群門檻與風險閘</text>
+      <g id="concept-conflict-gate" class="concept-card flow-node" data-title="矛盾來源優先送審" data-detail="來源文件模糊或來源互相矛盾時，即使信心分數高，也要送人工確認；高風險或低信心欄位也優先送審。">
+        <rect class="card-bg" x="430" y="207" width="320" height="110" rx="16" style="fill:#fff1ed;stroke:#dc9a8e"/>
+        <g class="card-content"><text x="452" y="249" class="card-title" style="fill:#a63f36">矛盾來源 → 人工</text><text x="452" y="285" class="body">高分也不能直接放行</text></g>
+      </g>
+      <g id="concept-calibrated-gate" class="concept-card flow-node" data-title="校準後才用分群門檻" data-detail="在未參與門檻調整的保留資料中，按文件型別與欄位驗證準確率及樣本數，再檢查業務風險上界。模型自報分數不是答對機率。">
+        <rect class="card-bg" x="430" y="337" width="320" height="160" rx="16" style="fill:#edf6f7;stroke:#8fbfc4"/>
+        <g class="card-content"><text x="452" y="379" class="card-title">分群證據夠嗎？</text><text x="452" y="417" class="body">文件型別 × 欄位</text><text x="452" y="455" class="body">錯誤率上界 × 樣本數</text></g>
+      </g>
+      <g id="concept-example-threshold" class="concept-card" data-title="先決定可容忍錯誤" data-detail="按欄位錯誤後果先定可容忍錯誤，再看每個分群的標註樣本數與實際準確率；高信心分數 0.95 本身不足以放行。">
+        <rect class="card-bg" x="430" y="518" width="320" height="121" rx="16"/>
+        <g class="card-content"><text x="452" y="558" class="card-title">先決定可容忍錯誤</text><text x="452" y="597" class="small">分群驗證；0.95 不是通行證</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-routes" class="section">
+    <rect class="section-bg" x="810" y="144" width="742" height="525" rx="22"/>
+    <g class="section-content">
+      <text x="840" y="183" class="section-title">③ 三條路由</text>
+      <g id="concept-human-route" class="concept-card flow-node" data-title="優先人工審查" data-detail="低信心、高風險、來源模糊或矛盾者優先人工。手寫日期分群在本例只有 12 筆驗證且錯 2 筆，不自動放行。">
+        <rect class="card-bg" x="842" y="207" width="678" height="122" rx="17" style="fill:#fff1ed;stroke:#dc9a8e"/>
+        <g class="card-content"><text x="870" y="248" class="card-title" style="fill:#a63f36">人工審查</text><text x="870" y="285" class="body">低信心／高風險優先；來源矛盾即使高分仍送審</text><text x="870" y="311" class="small">本例：手寫日期 12 筆錯 2 筆 → 不放行</text></g>
+      </g>
+      <g id="concept-release-sample" class="concept-card flow-node" data-title="自動放行與分層抽查" data-detail="已充分驗證的分群可暫定自動放行，但仍按文件型別、欄位、稀有類別或風險層隨機抽查，監測高信心錯誤與漂移；電子欄位不必因手寫日期失準而一律停用。">
+        <rect class="card-bg" x="842" y="350" width="678" height="155" rx="17" style="fill:#eaf7f4;stroke:#86bcb1"/>
+        <g class="card-content"><text x="870" y="391" class="card-title" style="fill:#176e62">自動放行 ＋ 分層抽查</text><text x="870" y="430" class="body">型別／欄位／稀有或風險層，各層隨機取樣</text><text x="870" y="468" class="small">只放行有分群證據的欄位；高信心仍定期抽查</text></g>
+      </g>
+      <g id="concept-more-labels" class="concept-card flow-node" data-title="待補標註" data-detail="資料稀少或代表性不足的分群，不能套用整體門檻。增加標註、保守送審或縮小自動化範圍，待新保留資料驗證後再調整。">
+        <rect class="card-bg" x="842" y="526" width="678" height="117" rx="17" style="fill:#fff7e9;stroke:#d6b579"/>
+        <g class="card-content"><text x="870" y="566" class="card-title" style="fill:#98611d">待補標註</text><text x="870" y="604" class="body">樣本或代表性不足 → 保守送審、累積證據</text></g>
+      </g>
+    </g>
+  </g>
+
+  <text x="76" y="718" class="small">人工審查與放行抽查都產生人工核對結果</text>
+  <text x="836" y="718" class="small">按各層母體與抽取機率回算錯誤率</text>
+
+  <g id="section-review" class="section">
+    <rect class="section-bg" x="48" y="764" width="724" height="296" rx="22"/>
+    <g class="section-content">
+      <text x="76" y="805" class="section-title">④ 同一審查畫面完成決策</text>
+      <g id="concept-review-screen" class="concept-card" data-title="人工審查畫面" data-detail="審查者要同時看到原文件、擷取值、信心分數與來源位置，以便判斷錯誤與來源矛盾，不需另尋證據。">
+        <rect class="card-bg" x="76" y="829" width="670" height="108" rx="16"/>
+        <g class="card-content"><text x="100" y="868" class="card-title">原文件　│　擷取值　│　信心　│　來源位置</text><text x="100" y="909" class="body">核准／修正／退回，保留原值與審查紀錄</text></g>
+      </g>
+      <g id="concept-review-capacity" class="concept-card" data-title="人工審查容量與等待期限" data-detail="依錯誤代價、來源矛盾與等待時長排序；容量不足就排隊、補人力或限制輸入量，不能放寬高風險門檻。同步審查需等待並設期限，逾時不得自動核准；繞過須有預先規則並留稽核。">
+        <rect class="card-bg" x="76" y="951" width="670" height="85" rx="16" style="fill:#fff9f0;stroke:#d9bb8e"/>
+        <g class="card-content"><text x="100" y="985" class="body">依風險、矛盾與等待時間排隊</text><text x="100" y="1014" class="small">超額排隊／加人／減流量；逾時不自動核准</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-feedback" class="section">
+    <rect class="section-bg" x="810" y="764" width="742" height="296" rx="22"/>
+    <g class="section-content">
+      <text x="838" y="805" class="section-title">⑤ 抽樣可解釋，回饋可重新校準</text>
+      <g id="concept-sampling-record" class="concept-card" data-title="記錄各層抽取機率" data-detail="高信心輸出按型別、欄位、稀有類別或風險分層隨機抽樣。各層抽取機率不同時，不能直接以過度抽樣樣本的錯誤數除以總樣本數推成全體錯誤率；要分層報告，估全體時按真實占比加權。">
+        <rect class="card-bg" x="838" y="829" width="686" height="95" rx="16"/>
+        <g class="card-content"><text x="864" y="869" class="card-title">記錄分層與抽取機率</text><text x="864" y="901" class="body">過度抽樣的錯誤率 ≠ 全體錯誤率</text></g>
+      </g>
+      <g id="concept-recalibrate-loop" class="concept-card flow-node" data-title="人工標註回饋校準" data-detail="核准、修正與退回形成已標註資料；找出高信心錯誤模式，修改提示或前處理後用未參與調整的保留資料重新校準各分群門檻，不只看模型自報分數是否上升。">
+        <rect class="card-bg" x="838" y="940" width="686" height="95" rx="16" style="fill:#f2eff9;stroke:#b6a6d7"/>
+        <g class="card-content"><text x="864" y="980" class="card-title" style="fill:#634d9b">核准／修正／退回 → 標註 → 重新校準</text><text x="864" y="1011" class="small">修正後以新保留資料檢查，再更新分群門檻</text></g>
+      </g>
+    </g>
+  </g>
+  <text x="52" y="1113" class="micro">教學重點：路由由風險容忍度、分群證據與審查容量共同決定；示例數字並非通用閾值。</text>
+</svg>

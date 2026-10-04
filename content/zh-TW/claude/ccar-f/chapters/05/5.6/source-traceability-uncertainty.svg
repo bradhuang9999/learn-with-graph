@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1190" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">5.6 先核對來源可比性，再判斷數值衝突</title>
+  <desc id="svg-desc">兩份主張各自保留數值、來源定位、資料期間、分母和日期。若期間或口徑不同，列為不可比較並補資料；若可比且數值一致，保留支持來源；若同期間同口徑仍互斥，保留雙值與來源版本、標未決，依權威規則或人工裁決，不能平均。</desc>
+  <style>
+    text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#1d3749}
+    .title{font-size:35px;font-weight:700}.subtitle{font-size:19px;fill:#526978}.section-bg{fill:#f5f8f6;stroke:#d7e3da;stroke-width:2}.section-title{font-size:23px;font-weight:700}.card-bg{fill:#fff;stroke:#bdd3c6;stroke-width:2}.card-title{font-size:23px;font-weight:700}.body{font-size:19px}.small{font-size:16px;fill:#526978}.micro{font-size:15px;fill:#526978}.flow-line{fill:none;stroke:#588d71;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.merge-line{fill:none;stroke:#588d71;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.flow-line.noncomparable{stroke:#bd7c31;marker-end:url(#arrow-amber)}.flow-line.conflict{stroke:#b9554c;marker-end:url(#arrow-red)}.flow-line.supported{stroke:#27836b;marker-end:url(#arrow-green)}.branch-label{font-size:16px;font-weight:700}.concept-card:hover .card-bg{stroke:#448a74;stroke-width:3}.flow-node{cursor:default}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#588d71"/></marker><marker id="arrow-amber" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#bd7c31"/></marker><marker id="arrow-red" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#b9554c"/></marker><marker id="arrow-green" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#27836b"/></marker></defs>
+  <rect width="1600" height="1190" style="fill:#fff"/>
+  <text x="50" y="61" class="title">5.6　兩個數字不同，先問「可比嗎？」</text>
+  <text x="50" y="98" class="subtitle">教學示意：每項主張帶來源位置、期間、分母與日期；不同不等於互相矛盾。</text>
+
+  <g id="section-evidence" class="section">
+    <rect class="section-bg" x="44" y="134" width="1512" height="282" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="176" class="section-title">先建立兩條可回溯的主張—來源鏈</text>
+      <g id="concept-finance-82" class="concept-card flow-node" data-title="第二季 82% 的財務證據" data-detail="內部《退款統計表》Q2 工作表，已結案退款 820 件、申請 1000 件，涵蓋 2026 第二季；資料於 2026-07-05 彙整。應保留表格欄位或儲存格位置、方法及文件版本。">
+        <rect class="card-bg" x="72" y="198" width="710" height="188" rx="17" style="fill:#eaf7ef;stroke:#9cc7aa"/>
+        <g class="card-content"><text x="98" y="239" class="card-title" style="fill:#20714e">82%｜內部財務表</text><text x="98" y="278" class="body">2026 第二季：已結案 820／申請 1,000</text><text x="98" y="315" class="small">定位：Q2 工作表兩欄 · 7/5 彙整</text><text x="98" y="349" class="small">口徑與分母明確，保留文件版本</text></g>
+      </g>
+      <g id="concept-release-76" class="concept-card flow-node" data-title="上半年 76% 的新聞稿主張" data-detail="2026-09-10 發布的《退款服務新聞稿》稱上半年退款成功率 76%，但未揭露分母與資料彙整日。只能轉述原稿主張，不能補猜口徑或把發布日當資料日。">
+        <rect class="card-bg" x="818" y="198" width="710" height="188" rx="17" style="fill:#fff8e9;stroke:#dec28a"/>
+        <g class="card-content"><text x="844" y="239" class="card-title" style="fill:#986321">76%｜新聞稿</text><text x="844" y="278" class="body">2026 上半年：聲稱退款成功率 76%</text><text x="844" y="315" class="small">定位：成功率段落 · 9/10 發布</text><text x="844" y="349" class="small">分母、資料彙整日未知</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-decision" class="section">
+    <rect class="section-bg" x="44" y="438" width="1512" height="662" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="480" class="section-title">來源可比性決策樹：三個不同出口</text>
+      <path class="flow-line noncomparable" d="M605 653 V712 H299 V790"/>
+      <path class="flow-line" d="M1068 583 H1280 V669"/>
+      <path class="flow-line supported" d="M1110 793 V817 H801 V854"/>
+      <path class="flow-line conflict" d="M1375 793 V854"/>
+      <text x="315" y="733" class="branch-label" style="fill:#986321">否／資訊不足</text>
+      <text x="1102" y="619" class="branch-label" style="fill:#20714e">是：再比數值</text>
+      <text x="916" y="820" class="branch-label" style="fill:#20714e">一致</text>
+      <text x="1390" y="827" class="branch-label" style="fill:#a7463e">仍不同</text>
+      <g id="concept-comparability-gate" class="concept-card flow-node" data-title="先核對期間與口徑是否可比" data-detail="同時比對資料涵蓋期間、母體、分母、成功率定義與方法；發布日和資料蒐集日必須分開記。期間不同、分母未知或方法不明時，先標限制，不可直接判定互斥。">
+        <rect class="card-bg" x="485" y="518" width="583" height="135" rx="18" style="fill:#ecf3f2;stroke:#9bbfb2"/>
+        <g class="card-content"><text x="513" y="562" class="card-title">① 同期間、同口徑、同分母？</text><text x="513" y="603" class="body">先分開記資料日與發布日，檢查母體</text><text x="513" y="630" class="small">82% 第二季；新聞稿 76% 上半年且缺分母</text></g>
+      </g>
+      <g id="concept-noncomparable" class="concept-card flow-node" data-title="不可直接比較的出口" data-detail="現例的第二季 82% 與上半年 76% 期間不同，新聞稿也未揭露分母。報告分別列兩項來源及限制，只確認內部表格的第二季數字、轉述新聞稿聲稱；若決策需要上半年同口徑值，應補原始統計。不能宣稱矛盾，也不能平均成 79%。">
+        <rect class="card-bg" x="72" y="790" width="454" height="264" rx="18" style="fill:#fff7e8;stroke:#d9bb82"/>
+        <g class="card-content"><text x="98" y="834" class="card-title" style="fill:#986321">出口 A｜不可直接比較</text><text x="98" y="873" class="body">82% 第二季 ≠ 76% 上半年</text><text x="98" y="909" class="body">新聞稿分母未知</text><text x="98" y="950" class="small">兩值分列，補原始統計與方法</text><text x="98" y="983" class="small">尚不能稱衝突；不能算成 79%</text></g>
+      </g>
+      <g id="concept-conflict-gate" class="concept-card flow-node" data-title="可比後仍須判斷數值是否互斥" data-detail="只有同一期間、同一母體與分母、同一方法口徑下，兩個可信數值仍不同，才是真正衝突；若數值一致，可合併支持來源，但不得因此刪去來源鏈。">
+        <rect class="card-bg" x="1040" y="669" width="480" height="124" rx="18"/>
+        <g class="card-content"><text x="1068" y="713" class="card-title">② 可比後，數值仍不同？</text><text x="1068" y="751" class="body">一致／互斥，處置不同</text></g>
+      </g>
+      <g id="concept-supported" class="concept-card flow-node" data-title="一致時保留多方支持" data-detail="若兩份來源的期間、口徑與數值都一致，可形成有充分來源支持的發現；合併主張時仍要檢查每份摘錄是否真的支持合併後措辭，保留來源集合與位置。">
+        <rect class="card-bg" x="557" y="854" width="466" height="200" rx="18" style="fill:#eaf7ef;stroke:#9cc7aa"/>
+        <g class="card-content"><text x="583" y="897" class="card-title" style="fill:#20714e">出口 B｜一致且可比</text><text x="583" y="937" class="body">列為有來源支持的發現</text><text x="583" y="975" class="small">合併後仍保留兩份摘錄與位置</text><text x="583" y="1008" class="small">引用存在 ≠ 摘錄真的支持主張</text></g>
+      </g>
+      <g id="concept-true-conflict" class="concept-card flow-node" data-title="同口徑仍衝突的出口" data-detail="假設另一可信表格同為 2026 第二季、同一申請分母 1000 件，卻報 760 件／76%。此時與 820 件／82% 真正互斥。並列雙值、來源表格位置、版本和彙整日期，標記未決；若任務有明確權威或版本規則可解決，記錄選擇與排除理由，否則交協調者或人工裁決。不可擅自平均。">
+        <rect class="card-bg" x="1054" y="854" width="466" height="200" rx="18" style="fill:#fff0ed;stroke:#d9a29b"/>
+        <g class="card-content"><text x="1080" y="897" class="card-title" style="fill:#a7463e">出口 C｜真正衝突</text><text x="1080" y="937" class="body">同為 Q2／1,000：820 與 760</text><text x="1080" y="975" class="small">保留雙值＋來源版本；標記未決</text><text x="1080" y="1008" class="small">查權威規則／人工裁決，不平均</text></g>
+      </g>
+    </g>
+  </g>
+  <path class="merge-line" d="M427 386V428H800 M1173 386V428H800"/>
+  <circle cx="800" cy="428" r="5" style="fill:#588d71"/>
+  <path class="flow-line" d="M800 428V518"/>
+  <text x="52" y="1140" class="micro">發布前逐項核對：主張文字、摘錄位置、資料期間與方法；即使採單一值，也記錄被排除值與理由。</text>
+</svg>

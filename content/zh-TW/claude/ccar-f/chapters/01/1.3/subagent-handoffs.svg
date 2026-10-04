@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc">
+  <title id="title">1.3 子代理的設定、明確交接與會話分叉</title>
+  <desc id="desc">區分協調者的委派權限、子代理類型與單次提示；新子代理不繼承前文，須把主張和來源明確傳入。新子代理與 fork_session 的起點不同。</desc>
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#37687f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      svg{font-family:'Microsoft JhengHei','Noto Sans TC',sans-serif;background:#fff}
+      text{fill:#18344a}.title{font-size:34px;font-weight:700}.subtitle{font-size:19px;fill:#526a7c}
+      .section-bg{fill:#f5f8fb;stroke:#c8d8e3;stroke-width:1.5}.section-title{font-size:23px;font-weight:700}
+      .card-bg{stroke-width:2}.card-title{font-size:22px;font-weight:700}.body{font-size:18.5px}.small{font-size:16px;fill:#536b7e}
+      .flow-line{fill:none;stroke:#37687f;stroke-width:3;stroke-linecap:round}.flow-label{font-size:16px;fill:#37687f;font-weight:700}
+      .card-content{pointer-events:none}.concept-card{cursor:pointer}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1400" height="1100" style="fill:#fff"/>
+  <text class="title" x="42" y="62">1.3 子代理：能派工 ≠ 有背景 ≠ 有工具權限</text>
+  <text class="subtitle" x="43" y="96">先分清設定層次，再把下一位代理真正需要的事實與來源交過去</text>
+
+  <g id="section-settings" class="section" data-title="三個設定層次" data-detail="協調者的 allowedTools、子代理類型的 AgentDefinition 和單次委派提示控制不同事項，不能互相代替。">
+    <rect class="section-bg" x="30" y="127" width="1340" height="250" rx="19"/>
+    <g class="section-content">
+      <text class="section-title" x="52" y="166">① 三個設定層次，各回答一個問題</text>
+      <g id="setting-parent" class="concept-card" data-title="協調者能否派工" data-detail="考綱以 Task 工具描述啟動機制；協調者的 allowedTools 必須允許 Task。實作名稱應按所用 SDK 版本核對。">
+        <rect class="card-bg" x="52" y="188" width="420" height="158" rx="15" style="fill:#e9f1ff;stroke:#88a9dd"/>
+        <g class="card-content">
+          <text class="card-title" x="74" y="225">協調者：能否啟動？</text>
+          <text class="body" x="74" y="261">allowedTools 允許考綱的 Task</text>
+          <text class="small" x="74" y="305">委派能力在協調者這一層</text>
+        </g>
+      </g>
+      <g id="setting-agent" class="concept-card" data-title="子代理類型能做什麼" data-detail="AgentDefinition 定義描述、系統提示與工具限制；協調者能啟動，並不代表子代理可任意查詢或寫入。">
+        <rect class="card-bg" x="490" y="188" width="420" height="158" rx="15" style="fill:#e8f7f0;stroke:#80bfa5"/>
+        <g class="card-content">
+          <text class="card-title" x="512" y="225">AgentDefinition：哪種代理？</text>
+          <text class="body" x="512" y="261">描述＋系統提示＋工具限制</text>
+          <text class="small" x="512" y="305">讀取型任務不必給寫入權限</text>
+        </g>
+      </g>
+      <g id="setting-call" class="concept-card" data-title="這次委派要做什麼" data-detail="每次提示都要寫清具體子題、必要背景與來源、品質標準和回傳格式。子代理不會自動取得協調者對話。">
+        <rect class="card-bg" x="928" y="188" width="420" height="158" rx="15" style="fill:#fff4e6;stroke:#dfa966"/>
+        <g class="card-content">
+          <text class="card-title" x="950" y="225">單次提示：這次做什麼？</text>
+          <text class="body" x="950" y="261">任務＋事實來源＋完成條件</text>
+          <text class="small" x="950" y="305">不靠對方猜測隱藏的前文</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-handoff" class="section" data-title="明確傳遞上下文" data-detail="交接時分開內容與來源中繼資料，把完成任務必需的相關發現直接放入下一位子代理的提示，不傾倒整段對話，也不只給模糊摘要。">
+    <rect class="section-bg" x="30" y="399" width="1340" height="413" rx="19"/>
+    <g class="section-content">
+      <text class="section-title" x="52" y="438">② 新子代理沒有「前文」：交接的是可核對的資料</text>
+      <path class="flow-line" d="M543 557 H848" marker-end="url(#arrow)"/>
+      <text class="flow-label" x="696" y="533" text-anchor="middle">明確放進提示</text>
+      <g id="handoff-sender" class="concept-card flow-node" data-title="協調者整理必要發現" data-detail="區分已核實主張、待驗假設、來源位置、限制與未解問題；只傳此子題所需，但重要發現不能遺漏。">
+        <rect class="card-bg" x="52" y="465" width="490" height="176" rx="16" style="fill:#fff3e5;stroke:#dda969"/>
+        <g class="card-content">
+          <text class="card-title" x="75" y="503">協調者整理</text>
+          <text class="body" x="75" y="543">已核實事實與來源</text>
+          <text class="body" x="75" y="575">待驗假設、限制、未解問題</text>
+          <text class="small" x="75" y="612">不能只寫「先前研究顯示有效」</text>
+        </g>
+      </g>
+      <g id="handoff-receiver" class="concept-card flow-node" data-title="新子代理只讀到傳入內容" data-detail="子代理不繼承父代理對話或其他呼叫的記憶；收到可追溯的發現後，才可獨立檢查、推理與回報失敗。">
+        <rect class="card-bg" x="850" y="465" width="498" height="176" rx="16" style="fill:#e8f7f0;stroke:#80bfa5"/>
+        <g class="card-content">
+          <text class="card-title" x="874" y="503">新子代理獨立工作</text>
+          <text class="body" x="874" y="543">讀到的只有明確傳入內容</text>
+          <text class="body" x="874" y="575">核對來源；回報證據與缺口</text>
+          <text class="small" x="874" y="612">不自動繼承協調者的對話</text>
+        </g>
+      </g>
+      <g id="handoff-record" class="concept-card" data-title="一筆主張與來源分欄的紀錄" data-detail="示例：平均處理時間下降 18%；來源是甲報告第 12 頁，並附原始網址。數值與報告均為教學用虛構資料，實際交接必須填入真實可追溯來源。">
+        <rect class="card-bg" x="52" y="667" width="1296" height="111" rx="14" style="fill:#fff;stroke:#b7cbd9"/>
+        <g class="card-content">
+          <text class="small" x="74" y="697">示意交接紀錄（虛構）</text>
+          <text class="body" x="74" y="734">主張：處理時間下降 18%</text>
+          <text class="body" x="538" y="734">來源：甲報告・第 12 頁・原始網址</text>
+          <text class="small" x="74" y="762">內容與來源分開；真實工作須填可追溯網址</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-fork" class="section" data-title="新子代理與分叉會話" data-detail="新子代理從明確提供的提示與工具設定起步；fork_session 從共同的既有分析基線起步，兩條分支後續各自探索。">
+    <rect class="section-bg" x="30" y="836" width="1340" height="218" rx="19"/>
+    <g class="section-content">
+      <text class="section-title" x="52" y="875">③ 兩種起點：新子代理與分叉會話不一樣</text>
+      <g id="new-subagent" class="concept-card" data-title="新子代理" data-detail="適合有界子題與隔離工作；前序發現須各自寫入這次委派提示，不能假設自動繼承。">
+        <rect class="card-bg" x="52" y="898" width="624" height="127" rx="15" style="fill:#e9f1ff;stroke:#88a9dd"/>
+        <g class="card-content">
+          <text class="card-title" x="75" y="935">新子代理｜獨立上下文</text>
+          <text class="body" x="75" y="969">起點＝本次提示＋核准工具</text>
+          <text class="small" x="75" y="1000">適合有界子題；前序發現須明確傳入</text>
+        </g>
+      </g>
+      <g id="fork-session" class="concept-card" data-title="fork_session" data-detail="適合從共同已驗證的分析基線比較不同方案；分叉後的探索各自演進，不能把它當作新子代理的自動交接。">
+        <rect class="card-bg" x="696" y="898" width="652" height="127" rx="15" style="fill:#f0ecfb;stroke:#aa96d3"/>
+        <g class="card-content">
+          <text class="card-title" x="719" y="935">fork_session｜共同分析基線</text>
+          <text class="body" x="719" y="969">起點＝同一份已核實的會話分析</text>
+          <text class="small" x="719" y="1000">適合比較方案；分叉後各自形成新發現</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

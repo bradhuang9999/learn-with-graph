@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1080" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">1.1 自主執行的 Agent 迴圈</title>
+  <desc id="svg-desc">主圖依序呈現感知、推理、行動、觀察，觀察結果沿上方回饋線回到感知。下方以責任邊界與部署調查案例說明模型如何依新證據改變下一步。</desc>
+  <defs>
+    <marker id="arrow-main" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-return" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      svg { font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif; background:#ffffff; }
+      text { dominant-baseline:alphabetic; }
+      .title { fill:#10233d; font-size:35px; font-weight:750; }
+      .subtitle { fill:#475569; font-size:19px; }
+      .section-bg { fill:#f8fafc; stroke:#d9e2ed; stroke-width:1.5; }
+      .section-title { fill:#172a46; font-size:23px; font-weight:700; }
+      .section-sub { fill:#64748b; font-size:17px; }
+      .card-bg { stroke-width:2; }
+      .node-title { font-size:25px; font-weight:750; }
+      .node-en { font-size:15.5px; font-weight:650; }
+      .node-line { fill:#27364b; font-size:18.5px; }
+      .node-em { fill:#142a46; font-size:18.5px; font-weight:700; }
+      .badge { fill:#ffffff; font-size:18px; font-weight:750; text-anchor:middle; }
+      .flow-line { fill:none; stroke:#334155; stroke-width:3; stroke-linecap:round; }
+      .return-line { fill:none; stroke:#7c3aed; stroke-width:3; stroke-dasharray:9 8; stroke-linecap:round; animation:flow-back 3.4s linear infinite; }
+      .return-label { fill:#6d28d9; font-size:18px; font-weight:700; text-anchor:middle; }
+      .keyline { fill:#475569; font-size:17px; }
+      .contrast-title { fill:#16324d; font-size:19px; font-weight:750; }
+      .contrast-line { fill:#334155; font-size:18px; }
+      .contrast-strong { fill:#7c3aed; font-size:20px; font-weight:750; }
+      .example-title { fill:#16324d; font-size:20px; font-weight:750; }
+      .example-label { fill:#475569; font-size:16px; font-weight:700; }
+      .example-line { fill:#26364b; font-size:18px; }
+      .foot { fill:#475569; font-size:16px; }
+      @keyframes flow-back { to { stroke-dashoffset:-136; } }
+      @media (prefers-reduced-motion:reduce) { .return-line { animation:none; } }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" style="fill:#ffffff"/>
+
+  <g id="header">
+    <text class="title" x="38" y="60">1.1 自主執行的 Agent 迴圈</text>
+    <text class="subtitle" x="40" y="94">模型依新觀察選下一步；執行環境負責工具、權限、結果回填與停止</text>
+    <rect x="1193" y="35" width="205" height="43" rx="21" style="fill:#f2edff;stroke:#ccbafc;stroke-width:1.5"/>
+    <text x="1295" y="63" text-anchor="middle" style="fill:#6d28d9;font-size:17px;font-weight:700">不是固定管線</text>
+  </g>
+
+  <g id="section-agentic-loop" class="section" data-title="四階段代理迴圈" data-detail="每一輪把新觀察加入上下文，重新感知、推理與選擇；因此下一步不必沿用上一輪的固定腳本。">
+    <rect class="section-bg" x="28" y="126" width="1384" height="474" rx="20"/>
+    <g class="section-content">
+      <text class="section-title" x="48" y="165">主結構｜四階段回饋迴圈</text>
+      <text class="section-sub" x="48" y="191">向右是本輪；上方紫色虛線把觀察所得帶回下一輪的感知</text>
+
+      <text class="return-label" x="722" y="240">結果回填上下文 → 重新感知與規劃</text>
+      <path class="return-line" d="M1244 316 L1244 276 Q1244 264 1232 264 L208 264 Q196 264 196 276 L196 316" marker-end="url(#arrow-return)"/>
+
+      <path class="flow-line" d="M345 430 H383" marker-end="url(#arrow-main)"/>
+      <path class="flow-line" d="M695 430 H733" marker-end="url(#arrow-main)"/>
+      <path class="flow-line" d="M1045 430 H1083" marker-end="url(#arrow-main)"/>
+
+      <g id="node-perception" class="concept-card flow-node" data-title="① 感知" data-detail="讀取目前目標、對話與已回填的工具結果，辨認哪些資訊已知、哪些仍未知；上下文是有限的暫時工作記憶。">
+        <rect class="card-bg" x="45" y="316" width="300" height="220" rx="18" style="fill:#eaf7ff;stroke:#54a8d7"/>
+        <circle cx="79" cy="354" r="21" style="fill:#087aa9"/>
+        <text class="badge" x="79" y="361">1</text>
+        <g class="card-content">
+          <text class="node-title" x="113" y="360" style="fill:#075985">感知</text>
+          <text class="node-en" x="63" y="389" style="fill:#087aa9">PERCEIVE</text>
+          <text class="node-line" x="63" y="425">讀取目標、對話與</text>
+          <text class="node-line" x="63" y="452">已回填的工具結果</text>
+          <line x1="63" y1="472" x2="326" y2="472" style="stroke:#b7dcec;stroke-width:1.5"/>
+          <text class="node-em" x="63" y="504">辨認已知與未知</text>
+        </g>
+      </g>
+
+      <g id="node-reasoning" class="concept-card flow-node" data-title="② 推理與選擇" data-detail="模型依本輪新證據與目標，決定是否要使用工具、選哪個工具與參數，或是否已有足夠證據回答；路徑可以在每輪改變。">
+        <rect class="card-bg" x="395" y="316" width="300" height="220" rx="18" style="fill:#f3efff;stroke:#a48ade"/>
+        <circle cx="429" cy="354" r="21" style="fill:#7952bb"/>
+        <text class="badge" x="429" y="361">2</text>
+        <g class="card-content">
+          <text class="node-title" x="463" y="360" style="fill:#5b3595">推理與選擇</text>
+          <text class="node-en" x="413" y="389" style="fill:#7952bb">REASON &amp; CHOOSE</text>
+          <text class="node-line" x="413" y="425">依新證據決定工具、</text>
+          <text class="node-line" x="413" y="452">參數，或是否回答</text>
+          <line x1="413" y1="472" x2="676" y2="472" style="stroke:#d6c5f1;stroke-width:1.5"/>
+          <text class="node-em" x="413" y="504">下一步由模型選</text>
+        </g>
+      </g>
+
+      <g id="node-action" class="concept-card flow-node" data-title="③ 行動與執行" data-detail="模型只提出結構化 tool_use；執行環境檢查權限、實際呼叫工具，並為每個請求取得成功或失敗結果。模型說已查詢不代表查詢真的發生。">
+        <rect class="card-bg" x="745" y="316" width="300" height="220" rx="18" style="fill:#fff6e8;stroke:#e0aa54"/>
+        <circle cx="779" cy="354" r="21" style="fill:#b87719"/>
+        <text class="badge" x="779" y="361">3</text>
+        <g class="card-content">
+          <text class="node-title" x="813" y="360" style="fill:#935b0b">行動與執行</text>
+          <text class="node-en" x="763" y="389" style="fill:#b87719">ACT &amp; EXECUTE</text>
+          <text class="node-line" x="763" y="425">模型提出結構化請求</text>
+          <text class="node-line" x="763" y="452">執行環境實際呼叫工具</text>
+          <line x1="763" y1="472" x2="1026" y2="472" style="stroke:#edcda0;stroke-width:1.5"/>
+          <text class="node-em" x="763" y="504">請求 ≠ 已執行</text>
+        </g>
+      </g>
+
+      <g id="node-observation" class="concept-card flow-node" data-title="④ 觀察與迭代" data-detail="執行環境把 tool_result 及錯誤回填對話；模型比較實際結果與目標，若不足以完成任務，就根據新資訊調整下一輪行動。">
+        <rect class="card-bg" x="1095" y="316" width="300" height="220" rx="18" style="fill:#eaf8f1;stroke:#62b895"/>
+        <circle cx="1129" cy="354" r="21" style="fill:#23825e"/>
+        <text class="badge" x="1129" y="361">4</text>
+        <g class="card-content">
+          <text class="node-title" x="1163" y="360" style="fill:#17684b">觀察與迭代</text>
+          <text class="node-en" x="1113" y="389" style="fill:#23825e">OBSERVE &amp; ITERATE</text>
+          <text class="node-line" x="1113" y="425">工具結果或錯誤回填</text>
+          <text class="node-line" x="1113" y="452">並與目標、預期比對</text>
+          <line x1="1113" y1="472" x2="1376" y2="472" style="stroke:#b6dfca;stroke-width:1.5"/>
+          <text class="node-em" x="1113" y="504">未達標就調整方向</text>
+        </g>
+      </g>
+      <text class="keyline" x="49" y="573">只有「結果回填 → 重新判斷」真的發生，才是可依觀察調整的迴圈。</text>
+    </g>
+  </g>
+
+  <g id="section-boundaries" class="section" data-title="兩個判斷邊界" data-detail="代理與固定流程的差別在執行時由誰選下一步；收到工具結果與模型結束回合都不等於業務交付完成。">
+    <rect class="section-bg" x="28" y="618" width="1384" height="184" rx="20"/>
+    <g class="section-content">
+      <text class="section-title" x="48" y="654">讀圖時要分清的兩個邊界</text>
+      <g id="boundary-agency" class="concept-card" data-title="代理與固定工作流程" data-detail="同樣可以使用模型與工具；若下一步工具順序、分支由程式預先寫死，就是固定工作流程。只有模型能依新觀察在執行時選擇下一步，才是代理迴圈。">
+        <rect class="card-bg" x="46" y="673" width="650" height="105" rx="15" style="fill:#ffffff;stroke:#b9c8dc"/>
+        <g class="card-content">
+          <text class="contrast-title" x="67" y="704">誰決定下一步？</text>
+          <text class="contrast-line" x="67" y="733">依新證據由模型選 → 代理；程式預設順序與分支 → 固定流程</text>
+          <text class="contrast-strong" x="67" y="761">差別不是「有沒有用模型」，而是決策權的位置。</text>
+        </g>
+      </g>
+      <g id="boundary-completion" class="concept-card" data-title="觀察不等於完成" data-detail="工具結果是觀察，不是工作達標的證據；end_turn 只結束模型當前回合。執行環境仍要檢查交付條件、錯誤與預算，不能把上限耗盡視為成功。">
+        <rect class="card-bg" x="716" y="673" width="678" height="105" rx="15" style="fill:#ffffff;stroke:#b9c8dc"/>
+        <g class="card-content">
+          <text class="contrast-title" x="737" y="704">何時算完成？</text>
+          <text class="contrast-line" x="737" y="733">收到結果 ≠ 工作達標；end_turn ≠ 任務交付成功</text>
+          <text class="contrast-strong" x="737" y="761">必須用實際證據檢查交付條件。</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-example" class="section" data-title="部署異常調查的第二輪" data-detail="第一輪查到日誌逾時，部署查詢卻因權限不足失敗。不能把缺失的部署資料當作已核實；第二輪改查可用來源，或在關鍵權限不可取得時升級。">
+    <rect class="section-bg" x="28" y="820" width="1384" height="209" rx="20"/>
+    <g class="section-content">
+      <text class="section-title" x="48" y="855">具體例子｜部署異常調查，第二輪為何會不同？</text>
+      <path class="flow-line" d="M435 945 H470" marker-end="url(#arrow-main)"/>
+      <path class="flow-line" d="M910 945 H945" marker-end="url(#arrow-main)"/>
+      <g id="example-first-round" class="concept-card flow-node" data-title="第一輪行動" data-detail="模型提出 read_log 與 get_deployment；執行環境執行並保留各自結果。">
+        <rect class="card-bg" x="46" y="881" width="389" height="119" rx="15" style="fill:#ffffff;stroke:#d1dce8"/>
+        <g class="card-content">
+          <text class="example-label" x="65" y="909">第一輪｜行動</text>
+          <text class="example-line" x="65" y="943">查日誌 + 查部署資訊</text>
+          <text class="example-line" x="65" y="972">兩個工具請求，都須有結果</text>
+        </g>
+      </g>
+      <g id="example-observation" class="concept-card flow-node" data-title="新觀察" data-detail="日誌顯示 22:14 起逾時；部署查詢因權限不足失敗。失敗必須作為錯誤回填，而不是空白成功。">
+        <rect class="card-bg" x="470" y="881" width="440" height="119" rx="15" style="fill:#ffffff;stroke:#d1dce8"/>
+        <g class="card-content">
+          <text class="example-label" x="489" y="909">新觀察｜一成功、一失敗</text>
+          <text class="example-line" x="489" y="943">日誌：22:14 起逾時</text>
+          <text class="example-line" x="489" y="972">部署查詢：權限不足</text>
+        </g>
+      </g>
+      <g id="example-next-round" class="concept-card flow-node" data-title="第二輪選擇" data-detail="依新資訊改查可用來源；如果根因判斷必須依賴無法取得的權限，應停止並升級，不能因時間相近就宣稱部署變更造成逾時。">
+        <rect class="card-bg" x="945" y="881" width="449" height="119" rx="15" style="fill:#f3efff;stroke:#a48ade"/>
+        <g class="card-content">
+          <text class="example-label" x="964" y="909">第二輪｜重新選擇</text>
+          <text class="example-line" x="964" y="943">改查可用來源，或停止升級</text>
+          <text class="example-line" x="964" y="972">不能把缺失證據當成已核實</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  <text class="foot" x="45" y="1056">執行環境另須管控權限、回合／費用預算與錯誤門檻；對話上下文是有限的暫時工作記憶。</text>
+</svg>

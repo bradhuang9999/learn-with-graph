@@ -1,0 +1,92 @@
+<h2>原始考綱</h2>
+<p>**Task Statement 2.3：**適當分配 Agent 的工具，並設定工具選擇方式。</p>
+<h3>知識要求</h3>
+<ul>
+<li>給 Agent 太多工具（例如 18 個而非 4–5 個）會增加決策複雜度，降低選擇可靠性。</li>
+<li>Agent 若取得專業範圍外的工具，容易誤用，例如讓綜整代理自行執行網頁搜尋。</li>
+<li>依角色限縮工具存取；只有高頻、明確需要的跨角色工具才例外提供。</li>
+<li><code>tool_choice</code> 的選項：<code>auto</code>、<code>any</code>，以及指定工具的強制選擇（<code>{&quot;type&quot;:&quot;tool&quot;,&quot;name&quot;:&quot;...&quot;}</code>）。</li>
+</ul>
+<h3>技能要求</h3>
+<ul>
+<li>把每個子代理的工具集限制在角色所需範圍，防止跨專業誤用。</li>
+<li>以受限的替代工具取代通用工具，例如以會驗證文件網址的 <code>load_document</code> 取代 <code>fetch_url</code>。</li>
+<li>對高頻需求提供範圍明確的跨角色工具（如綜整代理的 <code>verify_fact</code>），複雜情況則交由協調者路由。</li>
+<li>用 <code>tool_choice</code> 強制先呼叫指定工具（如 <code>extract_metadata</code>），後續擴充步驟再於下一輪處理。</li>
+<li>設定 <code>tool_choice: &quot;any&quot;</code>，確保模型呼叫工具，而不是直接回傳對話文字。</li>
+</ul>
+<h2>要點筆記</h2>
+<h3>先分清「能用什麼」與「這回合怎麼選」</h3>
+<p>工具控制有兩個層次，不能混為一談：<strong>工具範圍</strong>決定某個代理能看見並使用哪些能力；<code>tool_choice</code> 決定模型在<strong>這一回合</strong>是否必須呼叫工具、是否指定某一項。強制呼叫不會移除其他代理手中的危險工具，提示中的「不要使用」也不能代替實際權限設定。</p>
+<h3>依職責配置最小可用工具集</h3>
+<p>工具膨脹(Tool Bloat)指一個代理取得過多與自身任務無關的工具。候選越多、功能越重疊，路由越難穩定，還可能增加上下文成本；考綱的「18 個對 4–5 個」是比較案例，<strong>不是固定上限</strong>。專業子代理(Specialist Sub-agent)的做法，是只分配角色正常完成任務所需的能力。</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>應有能力</th>
+<th>應留在角色外的能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>擷取代理</td>
+<td>讀指定文件、擷取資料點</td>
+<td>編輯報告、傳送對外訊息</td>
+</tr>
+<tr>
+<td>查證代理</td>
+<td>查來源、逐項比對主張</td>
+<td>廣泛資料寫入</td>
+</tr>
+<tr>
+<td>彙整代理</td>
+<td>整合已查證結果、起草回覆</td>
+<td>重新執行整份來源調查</td>
+</tr>
+<tr>
+<td>協調者</td>
+<td>分派任務、判斷交接、整合失敗與部分結果</td>
+<td>無必要的領域專用寫入</td>
+</tr>
+</tbody>
+</table>
+<p>範圍不只涉及數量，也涉及工具本身的權限。若擷取代理只該讀受核准文件，提供會驗證文件網址的 <code>load_document</code>，比給任意網址的 <code>fetch_url</code> 再靠提示限制更可靠。彙整代理若經常只需核對一句，可給窄範圍 <code>verify_fact</code>；完整查證仍交協調者分派。這類跨角色工具是刻意的例外；像結構化日誌這種每個角色都確實需要的能力，也可刻意共用，但須明定它只記錄而不擴大業務權限。例外越多，越應重看角色切分與交接設計。</p>
+<p>配置時逐一問：此角色的任務是什麼？此工具是否為完成它所必需？是否有較窄的替代介面？誰能在執行層核准或拒絕呼叫？工具不常使用時也應定期移除；不要因新需求第一次路由失敗就一律新增工具。</p>
+<h3><code>tool_choice</code> 約束的是本回合</h3>
+<table>
+<thead>
+<tr>
+<th>設定</th>
+<th>本回合的效果</th>
+<th>適用情境</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto</code></td>
+<td>可呼叫工具，也可直接回答</td>
+<td>是否還需外部資料，由目前證據決定。</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td>必須呼叫所提供工具中的某一個，不指定哪個</td>
+<td>必須先查證，但幾個工具都可能是正確入口。</td>
+</tr>
+<tr>
+<td><code>{&quot;type&quot;:&quot;tool&quot;,&quot;name&quot;:&quot;extract_metadata&quot;}</code></td>
+<td>必須呼叫指定工具</td>
+<td>後續處理前必須先取得檔案版本與頁數。</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>本回合不呼叫工具</td>
+<td>只要整理已取得結果；這是實際 API 的補充選項。</td>
+</tr>
+</tbody>
+</table>
+<p><code>any</code> 保證有呼叫，<strong>不保證選對</strong>；指定工具保證這一步，<strong>不會自動完成下一步</strong>。收到 <code>extract_metadata</code> 結果後，下一回合須根據版本、授權狀態與任務需要重新設定策略；若只需回答，就不應繼續強制抽取中繼資料。<code>auto</code> 加上提示可以引導呼叫，卻不能用作「一定先查」的硬保證。</p>
+<p>強制選擇是否可用也受模型與設定限制；<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools" target="_blank" rel="noopener noreferrer">Anthropic 工具選擇文件</a>應作部署時的版本依據。若目前組合不支援 <code>any</code> 或指定工具，而流程必須先取中繼資料，應由<strong>應用程式流程</strong>先執行並驗證此步，再把結果交代理，而不是只在提示寫「務必先做」。</p>
+<h3>合併判斷：先限範圍，再選策略</h3>
+<p>付款文件調查需要先知道文件版本。協調者先把文件 URI 交給只具備文件能力的擷取代理；在支援強制選擇的模型上，第一回合指定 <code>extract_metadata</code>，確認版本、頁數與權限。接著開放 <code>load_document</code> 與 <code>extract_data_points</code>，讓代理取出附段落位置的事實。查證代理再核對客服說法，彙整代理只接收證據與未解項目。若版本不符，交回協調者重啟擷取，而不是把所有調查工具加給彙整代理。</p>
+<p>這個流程同時檢驗兩道邊界：彙整者是否<strong>沒有</strong>越界工具，以及每回合是否依當下狀態選 <code>auto</code>、<code>any</code> 或指定工具。缺一不可。</p>

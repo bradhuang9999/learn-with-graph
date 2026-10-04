@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1260" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">2.4 MCP Server 的設定範圍與三種能力</title>
+  <desc id="svg-desc">專案連線設定放在可分享的 .mcp.json，個人憑證由各成員在本機環境提供；本機與使用者範圍皆記在個人設定中但作用不同。連線、授權與能力發現後，MCP 工具沿呼叫路徑取得議題狀態，資源沿目錄及 URI 路徑讀取資料結構，提示則由使用者選擇範本。</desc>
+  <style>
+    text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#1a354d}
+    .title{font-size:35px;font-weight:700}.subtitle{font-size:19px;fill:#526a7d}.section-bg{fill:#f4f8fb;stroke:#d2dfea;stroke-width:2}.section-title{font-size:23px;font-weight:700}.card-bg{fill:#fff;stroke:#bdd0df;stroke-width:2}.card-title{font-size:22px;font-weight:700}.body{font-size:19px}.small{font-size:16px;fill:#4f687a}.micro{font-size:15px;fill:#526a7d}.flow-line{fill:none;stroke:#347fa0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.flow-line.resource{stroke:#8866a9;marker-end:url(#arrow-purple)}.flow-node{cursor:default}.concept-card:hover .card-bg{stroke:#4f8da9;stroke-width:3}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1L9 5.5L1 10" style="fill:none;stroke:#347fa0;stroke-width:2;stroke-linejoin:round"/></marker><marker id="arrow-purple" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1L9 5.5L1 10" style="fill:none;stroke:#8866a9;stroke-width:2;stroke-linejoin:round"/></marker></defs>
+  <rect width="1600" height="1260" style="fill:#fff"/>
+  <text x="50" y="61" class="title">2.4　MCP 整合：設定誰可用，再選工具或資源</text>
+  <text x="50" y="98" class="subtitle">共享連線設定與個人憑證分開；工具執行查詢，資源提供可定位的背景資料。</text>
+
+  <g id="section-scopes" class="section">
+    <rect class="section-bg" x="44" y="136" width="1512" height="326" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="178" class="section-title">設定與憑證：位置決定共享邊界</text>
+      <g id="concept-project-config" class="concept-card" data-title="專案共享連線設定" data-detail="專案根目錄 .mcp.json 可納入版本控制，讓團隊共用伺服器連線方式與環境變數參照，例如 ${ISSUE_TOKEN}；檔案不放實際密鑰。新人仍需依信任與核准流程啟用。">
+        <rect class="card-bg" x="72" y="205" width="352" height="218" rx="17" style="fill:#e9f6ef;stroke:#93c4a8"/>
+        <g class="card-content"><text x="96" y="247" class="card-title">專案｜.mcp.json</text><text x="96" y="287" class="body">團隊共用連線設定</text><text x="96" y="324" class="body">只放 ${ISSUE_TOKEN} 參照</text><text x="96" y="363" class="small">可版控；仍須核准伺服器</text></g>
+      </g>
+      <g id="concept-local-credential" class="concept-card" data-title="成員各自提供憑證" data-detail="每位成員在自己的啟動環境提供 ISSUE_TOKEN 實際值；專案 .mcp.json 的環境變數參照不等於憑證已分享，也不能保證連線成功。若缺憑證，應檢查 MCP 連線或授權狀態。">
+        <rect class="card-bg" x="444" y="205" width="352" height="218" rx="17" style="fill:#fff8e9;stroke:#dec28b"/>
+        <g class="card-content"><text x="468" y="247" class="card-title">個人環境｜實際憑證</text><text x="468" y="287" class="body">每位成員自備 ISSUE_TOKEN</text><text x="468" y="324" class="body">不寫入共用設定檔</text><text x="468" y="363" class="small">缺值時連線／授權可能失敗</text></g>
+      </g>
+      <g id="concept-local-scope" class="concept-card" data-title="本機範圍" data-detail="本機範圍記在 ~/.claude.json 中此專案的項目，只對本人目前專案有效，適合個人試驗伺服器；不會隨專案版本控制分享。">
+        <rect class="card-bg" x="816" y="205" width="352" height="218" rx="17"/>
+        <g class="card-content"><text x="840" y="247" class="card-title">本機｜~/.claude.json</text><text x="840" y="287" class="body">本人此專案有效</text><text x="840" y="324" class="body">適合試驗伺服器</text><text x="840" y="363" class="small">不隨版本控制分享</text></g>
+      </g>
+      <g id="concept-user-scope" class="concept-card" data-title="使用者範圍" data-detail="使用者範圍也記在 ~/.claude.json，但對本人所有專案有效，適合常用個人服務；同一檔案不代表與本機範圍有相同作用域。">
+        <rect class="card-bg" x="1188" y="205" width="340" height="218" rx="17"/>
+        <g class="card-content"><text x="1212" y="247" class="card-title">使用者｜~/.claude.json</text><text x="1212" y="287" class="body">本人所有專案可用</text><text x="1212" y="324" class="body">適合常用個人服務</text><text x="1212" y="363" class="small">同檔案、不同作用域</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-gates" class="section">
+    <rect class="section-bg" x="44" y="485" width="1512" height="199" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="527" class="section-title">能力進入代理決策前，依序查三道門</text>
+      <path class="flow-line" d="M492 602 H557"/>
+      <path class="flow-line" d="M1007 602 H1072"/>
+      <g id="concept-connected" class="concept-card flow-node" data-title="伺服器連線狀態" data-detail="核對伺服器設定、信任核准、憑證與連線；可透過 /mcp 或 claude mcp list/get 檢查。已分享設定不等於每人都已成功連線。">
+        <rect class="card-bg" x="72" y="550" width="420" height="105" rx="16"/>
+        <g class="card-content"><text x="96" y="591" class="card-title">① 伺服器已連線？</text><text x="96" y="626" class="small">設定＋核准＋個人憑證</text></g>
+      </g>
+      <g id="concept-authorized" class="concept-card flow-node" data-title="代理權限" data-detail="即使 MCP 已連線，代理仍需被允許使用相應能力；角色的最小工具範圍要在執行層落地，按需搜尋不能替代權限。">
+        <rect class="card-bg" x="557" y="550" width="450" height="105" rx="16"/>
+        <g class="card-content"><text x="581" y="591" class="card-title">② 代理已獲准？</text><text x="581" y="626" class="small">角色工具範圍在執行層落地</text></g>
+      </g>
+      <g id="concept-discoverable" class="concept-card flow-node" data-title="能力可發現且能選對" data-detail="按需工具搜尋可減少一次載入所有工具定義的上下文負擔，但清楚的伺服器能力說明、工具描述與資料來源邊界仍是正確選用的條件。">
+        <rect class="card-bg" x="1072" y="550" width="456" height="105" rx="16"/>
+        <g class="card-content"><text x="1096" y="591" class="card-title">③ 找得到且選對？</text><text x="1096" y="626" class="small">按需搜尋不修補含糊描述</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-capabilities" class="section">
+    <rect class="section-bg" x="44" y="707" width="1512" height="405" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="749" class="section-title">MCP Server 公開工具與資源：按需求走不同路徑</text>
+      <g id="concept-host-client" class="concept-card flow-node" data-title="Claude Code Host 與 MCP Client 發起請求" data-detail="Claude Code 作為 Host 維持 MCP Client 連線；由 Client 向 Server 發送工具列出、工具呼叫、資源列出或資源讀取請求。模型可選擇工具，但不會直接與 Server 建立連線。">
+        <rect class="card-bg" x="540" y="765" width="365" height="82" rx="17" style="fill:#eaf2f9;stroke:#9bbad0"/>
+        <g class="card-content"><text x="722" y="798" text-anchor="middle" class="card-title">Claude Code Host／Client</text><text x="722" y="829" text-anchor="middle" class="small">發起列出、呼叫與讀取</text></g>
+      </g>
+      <g id="concept-server" class="concept-card flow-node" data-title="MCP Server 回傳能力或結果" data-detail="Server 回應 Client 的請求：列出可用工具或資源，執行工具並回傳結果，或讀取指定資源。Server 公開能力，但不是主動呼叫 Host。">
+        <rect class="card-bg" x="1120" y="765" width="360" height="82" rx="17" style="fill:#e9f6ef;stroke:#92c2a7"/>
+        <g class="card-content"><text x="1300" y="798" text-anchor="middle" class="card-title">MCP Server</text><text x="1300" y="829" text-anchor="middle" class="small">回傳能力、內容或結果</text></g>
+      </g>
+      <path class="flow-line" d="M905 787H1110"/><text x="924" y="776" class="micro">請求：list／call／read</text>
+      <path class="flow-line" d="M1120 824H915"/><text x="944" y="846" class="micro">回應：能力／內容／結果</text>
+      <path class="flow-line" d="M700 847 V870 H174 V906"/>
+      <path class="flow-line resource" d="M830 847 V870 H948 V906"/>
+      <text x="296" y="897" class="small" style="fill:#236e91">Tools｜模型選用並呼叫</text>
+      <text x="1055" y="897" class="small" style="fill:#79589a">Resources｜目錄與 URI</text>
+      <path class="flow-line" d="M277 999 H319"/>
+      <path class="flow-line" d="M502 999 H544"/>
+      <path class="flow-line resource" d="M1045 999 H1087"/>
+      <path class="flow-line resource" d="M1270 999 H1312"/>
+      <g id="concept-tool-discovery" class="concept-card flow-node" data-title="Host 列工具，模型發現合適議題工具" data-detail="Client 向 Server 列出工具後，Host 可讓模型按需搜尋載入工具定義；描述需說清遠端議題來源、篩選輸入、回傳議題 ID／狀態／摘要，以及與本機 Grep 的邊界。">
+        <rect class="card-bg" x="72" y="913" width="205" height="151" rx="16" style="fill:#e9f4fb;stroke:#a1c5dd"/>
+        <g class="card-content"><text x="94" y="954" class="card-title">Host 列工具</text><text x="94" y="992" class="body">模型按需發現</text><text x="94" y="1028" class="small">描述清楚來源</text></g>
+      </g>
+      <g id="concept-tool-call" class="concept-card flow-node" data-title="模型選工具，Host/Client 呼叫 Server" data-detail="模型按日期與關鍵字選用議題工具，Host/Client 代為呼叫 Server，以取得本週付款錯誤議題；這不是讀取本機舊匯出檔。">
+        <rect class="card-bg" x="319" y="913" width="183" height="151" rx="16" style="fill:#e9f4fb;stroke:#a1c5dd"/>
+        <g class="card-content"><text x="341" y="954" class="card-title">模型選工具</text><text x="341" y="992" class="body">日期＋關鍵字</text><text x="341" y="1028" class="small">Client 代為呼叫</text></g>
+      </g>
+      <g id="concept-tool-result" class="concept-card flow-node" data-title="取得可追溯議題結果" data-detail="議題工具回傳 ID、狀態、摘要及適用的更新時間；Grep 命中本機舊匯出檔不能證明遠端最新狀態。">
+        <rect class="card-bg" x="544" y="913" width="205" height="151" rx="16" style="fill:#e9f4fb;stroke:#a1c5dd"/>
+        <g class="card-content"><text x="566" y="954" class="card-title">取得結果</text><text x="566" y="992" class="body">ID／狀態／摘要</text><text x="566" y="1028" class="small">留意更新時間</text></g>
+      </g>
+      <g id="concept-resource-list" class="concept-card flow-node" data-title="Host 列出並讀取目錄" data-detail="示意目錄資源 issues://catalog 列出付款議題摘要 issues://payment/summary 與議題欄位說明 issues://schema。Host 先列出可用資源，再讀目錄；目錄資訊不能繞過伺服器授權。">
+        <rect class="card-bg" x="852" y="913" width="193" height="151" rx="16" style="fill:#f4eef9;stroke:#c6aeda"/>
+        <g class="card-content"><text x="874" y="954" class="card-title">Host 列目錄</text><text x="874" y="992" class="body">issues://catalog</text><text x="874" y="1028" class="small">讀取可選 URI</text></g>
+      </g>
+      <g id="concept-resource-uri" class="concept-card flow-node" data-title="代理選擇具體資源 URI" data-detail="代理看到 Host 提供的目錄後，按任務要求讀取所需 URI，例如 issues://payment/summary；URI 是此示意 Server 的自訂位址。">
+        <rect class="card-bg" x="1087" y="913" width="183" height="151" rx="16" style="fill:#f4eef9;stroke:#c6aeda"/>
+        <g class="card-content"><text x="1109" y="954" class="card-title">代理選 URI</text><text x="1109" y="992" class="body">按任務選摘要</text><text x="1109" y="1028" class="small">不盲猜路徑</text></g>
+      </g>
+      <g id="concept-resource-read" class="concept-card flow-node" data-title="Host 讀取議題摘要" data-detail="Host 按選定的 URI 向 Server 讀取付款議題摘要或議題欄位說明，交回代理使用；若還需要最新議題狀態，之後再呼叫相應工具。讀資源仍須通過 Server 授權。">
+        <rect class="card-bg" x="1312" y="913" width="216" height="151" rx="16" style="fill:#f4eef9;stroke:#c6aeda"/>
+        <g class="card-content"><text x="1334" y="954" class="card-title">Host 讀資源</text><text x="1334" y="992" class="body">議題摘要／欄位</text><text x="1334" y="1028" class="small">需最新狀態再查詢</text></g>
+      </g>
+    </g>
+  </g>
+  <g id="section-prompts" class="section"><rect class="section-bg" x="44" y="1130" width="1512" height="75" rx="18"/><g class="section-content"><g id="concept-prompt" class="concept-card" data-title="MCP 提示：使用者選擇範本" data-detail="提示是 MCP 的第三種能力。Server 可公開可重用起始範本，例如『付款事件調查』；通常由使用者選取，再由 Host 取得提示內容並放入工作流程。它不是模型自行呼叫的工具，也不是資料資源。"><text x="72" y="1177" class="body">第三種能力｜提示(Prompt)：使用者選擇「付款事件調查」範本 → Host 取得內容並啟動流程</text></g></g></g>
+  <text x="52" y="1238" class="micro">資料來源判準：遠端議題與目錄用 MCP；本機函式、錯誤字串與測試檔用 Grep／Glob／Read。</text>
+</svg>

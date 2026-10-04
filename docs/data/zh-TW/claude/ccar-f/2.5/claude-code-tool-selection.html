@@ -1,0 +1,70 @@
+<h2>原始考綱</h2>
+<p>**Task Statement 2.5：**有效選擇並使用內建工具 Read、Write、Edit、Bash、Grep 與 Glob。</p>
+<h3>知識要求</h3>
+<ul>
+<li><code>Grep</code> 用於搜尋檔案內容，例如函式名稱、錯誤訊息或匯入敘述。</li>
+<li><code>Glob</code> 用於比對檔案路徑模式，依名稱或副檔名找檔案。</li>
+<li><code>Read</code>／<code>Write</code> 用於完整檔案操作；<code>Edit</code> 以唯一文字比對做定點修改。</li>
+<li>當 <code>Edit</code> 因文字比對不唯一而失敗時，可改用 <code>Read</code> 加 <code>Write</code> 可靠地修改檔案。</li>
+</ul>
+<h3>技能要求</h3>
+<ul>
+<li>用 <code>Grep</code> 搜尋程式庫內容，例如找出函式的所有呼叫點或定位錯誤訊息。</li>
+<li>用 <code>Glob</code> 尋找符合命名模式的檔案，例如 <code>**/*.test.tsx</code>。</li>
+<li>當 <code>Edit</code> 找不到唯一定位文字時，先以 <code>Read</code> 載入完整檔案，再用 <code>Write</code> 寫入。</li>
+<li>漸進建立程式庫理解：先用 <code>Grep</code> 找入口，再用 <code>Read</code> 追蹤匯入與流程，而非一開始讀完所有檔案。</li>
+<li>跨包裝模組追蹤函式用法時，先找出所有匯出名稱，再逐一搜尋整個程式庫。</li>
+</ul>
+<h2>要點筆記</h2>
+<h3>先辨認要找的是路徑、內容還是上下文</h3>
+<p>在 Claude Code 的本機程式庫任務中，先分清四種動作：<strong>找路徑、找內容、讀懂上下文、修改或驗證</strong>。這六個考綱工具不是同義替代品；選錯工具，常會讓代理漏掉包裝後的呼叫端，或覆蓋原本不打算修改的內容。本節談的是 Claude Code 工具語境，並非 Messages API 的同名用戶端工具。</p>
+<h3>六種工具各解決什麼問題</h3>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>主要用途</th>
+<th>選擇界線</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Glob</code></td>
+<td>依檔名或路徑樣式找檔案，如 <code>**/*.test.tsx</code></td>
+<td>不檢查檔案內容。</td>
+</tr>
+<tr>
+<td><code>Grep</code></td>
+<td>在檔案內容找函式名、錯誤訊息或匯入語句</td>
+<td>命中不等於該檔真的在執行路徑上。</td>
+</tr>
+<tr>
+<td><code>Read</code></td>
+<td>讀取目標檔案，理解實作、匯入與上下文</td>
+<td>不修改檔案；不要為了探索一個符號先讀完整程式庫。</td>
+</tr>
+<tr>
+<td><code>Edit</code></td>
+<td>以可辨認的舊文字作局部修改</td>
+<td>錨點須能唯一定位目標；不唯一時先重新讀檔。</td>
+</tr>
+<tr>
+<td><code>Write</code></td>
+<td>新建檔案或寫入完整檔案內容</td>
+<td>對既有檔案是全檔覆寫，須保留所有無關內容。</td>
+</tr>
+<tr>
+<td><code>Bash</code></td>
+<td>執行測試、建置或專用工具無法完成的命令</td>
+<td>能影響的系統範圍較廣，先確認命令與權限；不用它代替每次簡單搜尋。</td>
+</tr>
+</tbody>
+</table>
+<p>這張表的重點不是死記順序，而是辨認資料型態：問「哪個路徑符合樣式」用 <code>Glob</code>；問「哪裡出現字串」用 <code>Grep</code>；問「這個命中如何運作」再用 <code>Read</code>。修改則先確認目標與原檔目前狀態。</p>
+<h3>沿公開名稱追蹤，而非只找第一個命中</h3>
+<p>理解陌生程式庫可採「搜尋入口 → 讀取實作 → 追蹤匯入、再匯出與包裝 → 搜尋每個公開名稱的使用處」。這是增量建構理解，不是一次把全庫內容載入上下文。</p>
+<p>例如 <code>payments/core.ts</code> 定義 <code>chargeCard</code>，<code>payments/index.ts</code> 再匯出，<code>billing/adapter.ts</code> 包成 <code>submitPayment</code>，最後又以 <code>pay</code> 提供給畫面。只搜尋 <code>chargeCard</code>，可能漏掉只呼叫 <code>pay</code> 的 UI。應先用 <code>Grep</code> 找定義與匯出，逐層 <code>Read</code> 確認別名關係，再分別搜尋 <code>chargeCard</code>、<code>submitPayment</code>、<code>pay</code> 的呼叫處。要找相關測試檔，先用 <code>Glob</code> 尋找路徑，再用 <code>Read</code> 確認測試是否真的覆蓋付款逾時分支。</p>
+<p>同一字串在多處出現，也不表示都該修改。必須核對它們是否屬於同一付款通道、是否有不同的重試規則。搜尋提供候選，閱讀才建立因果；修改前要知道變更會從哪個實作傳到哪些呼叫端。</p>
+<h3><code>Edit</code> 找不到唯一位置時怎麼辦</h3>
+<p>若 <code>Edit</code> 因相同舊文字出現多次而無法定位，<strong>不要直接全部替換</strong>。先重新 <code>Read</code> 全檔，辨認每個出現位置；若能以較長且唯一的上下文定位，就使用 <code>Edit</code>。若仍無法可靠匹配，按考綱改用 <code>Read</code> 加 <code>Write</code>：以完整的新檔內容寫回，並在寫入前後核對差異，確定無關段落都保留。若讀取後檔案已由他人修改，須重新讀取與比對，避免用過時版本覆蓋新變更。</p>
+<p>付款逾時範例中，三個通道都含 <code>throw new Error(&quot;Payment timed out&quot;)</code>，只有卡片通道要改成「先查交易狀態」。先追蹤通道與包裝鏈，再對唯一目標做局部修改；必要時才全檔寫回。最後執行相關測試或建置，檢查 <code>pay</code> 等公開入口真的採用新說法。程式碼已能編譯，不等於所有畫面與呼叫端都走到新分支。</p>

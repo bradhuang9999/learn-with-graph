@@ -1,0 +1,297 @@
+{
+  "locales": [
+    "zh-TW"
+  ],
+  "courses": [
+    {
+      "id": "claude/ccar-f",
+      "locale": "zh-TW",
+      "category": "Claude 認證",
+      "title": "Claude Certified Architect — Foundations",
+      "shortTitle": "CCAR-F",
+      "description": "從 Agent 架構、工具整合，到提示設計與可靠性，循序建立 Claude 系統設計能力。",
+      "chapters": [
+        {
+          "id": "01",
+          "title": "Agent 架構與編排",
+          "description": "建立代理迴圈、任務拆解、交接與工作階段的設計觀。",
+          "lessons": [
+            {
+              "id": "1.1",
+              "title": "設計與實作自主執行的 Agent 迴圈",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.1/agentic-loop.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.1/agentic-loop.html"
+            },
+            {
+              "id": "1.2",
+              "title": "以協調者與子代理模式編排多 Agent 系統",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.2/orchestrator-subagents.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.2/orchestrator-subagents.html"
+            },
+            {
+              "id": "1.3",
+              "title": "設定子代理呼叫、上下文傳遞與生成",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.3/subagent-handoffs.svg",
+                "data/zh-TW/claude/ccar-f/1.3/parallel-research-traceable-synthesis.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.3/subagent-handoffs.html"
+            },
+            {
+              "id": "1.4",
+              "title": "多步工作流程的強制執行與交接",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.4/workflow-enforcement-handoffs.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.4/workflow-enforcement-handoffs.html"
+            },
+            {
+              "id": "1.5",
+              "title": "用 Agent SDK Hooks 攔截工具呼叫並正規化資料",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.5/agent-sdk-hooks.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.5/agent-sdk-hooks.html"
+            },
+            {
+              "id": "1.6",
+              "title": "設計複雜工作的任務拆解策略",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.6/task-decomposition.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.6/task-decomposition.html"
+            },
+            {
+              "id": "1.7",
+              "title": "管理工作階段狀態、續接與分叉",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/1.7/session-state-resume-fork.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/1.7/session-state-resume-fork.html"
+            }
+          ]
+        },
+        {
+          "id": "02",
+          "title": "工具與 MCP 整合",
+          "description": "設計工具介面、錯誤契約、權限與 MCP 工作流程。",
+          "lessons": [
+            {
+              "id": "2.1",
+              "title": "設計描述清晰且邊界明確的工具介面",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/2.1/tool-interface-design.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/2.1/tool-interface-design.html"
+            },
+            {
+              "id": "2.2",
+              "title": "為 MCP 工具實作結構化錯誤回應",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/2.2/mcp-structured-errors.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/2.2/mcp-structured-errors.html"
+            },
+            {
+              "id": "2.3",
+              "title": "分配代理工具並設定工具選擇",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/2.3/agent-tools-tool-choice.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/2.3/agent-tools-tool-choice.html"
+            },
+            {
+              "id": "2.4",
+              "title": "將 MCP Server 整合進 Claude Code 與 Agent 工作流程",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/2.4/mcp-integration-workflows.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/2.4/mcp-integration-workflows.html"
+            },
+            {
+              "id": "2.5",
+              "title": "有效選用 Read、Write、Edit、Bash、Grep、Glob",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/2.5/claude-code-tool-selection.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/2.5/claude-code-tool-selection.html"
+            }
+          ]
+        },
+        {
+          "id": "03",
+          "title": "Claude Code 設定與工作流程",
+          "description": "運用專案記憶、技能、路徑規則與 CI 工作流。",
+          "lessons": [
+            {
+              "id": "3.1",
+              "title": "設定 CLAUDE.md 的層級、範圍與模組化",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.1/claude-md-hierarchy.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.1/claude-md-hierarchy.html"
+            },
+            {
+              "id": "3.2",
+              "title": "建立並設定自訂斜線指令與技能",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.2/custom-commands-skills.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.2/custom-commands-skills.html"
+            },
+            {
+              "id": "3.3",
+              "title": "套用按路徑條件載入的規則",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.3/path-scoped-rules.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.3/path-scoped-rules.html"
+            },
+            {
+              "id": "3.4",
+              "title": "判斷計畫模式與直接執行的使用時機",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.4/plan-vs-direct-execution.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.4/plan-vs-direct-execution.html"
+            },
+            {
+              "id": "3.5",
+              "title": "用反覆修正逐步提高品質",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.5/iterative-improvement.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.5/iterative-improvement.html"
+            },
+            {
+              "id": "3.6",
+              "title": "將 Claude Code 整合至 CI 與 CD",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/3.6/claude-code-ci-cd.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/3.6/claude-code-ci-cd.html"
+            }
+          ]
+        },
+        {
+          "id": "04",
+          "title": "提示設計、驗證與審查",
+          "description": "把輸出品質轉成可驗證、可重試、可審查的流程。",
+          "lessons": [
+            {
+              "id": "4.1",
+              "title": "用明確標準提高精確度並減少誤報",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.1/precision-false-positives.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.1/precision-false-positives.html"
+            },
+            {
+              "id": "4.2",
+              "title": "以少樣本範例改善一致性與品質",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.2/few-shot-examples.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.2/few-shot-examples.html"
+            },
+            {
+              "id": "4.3",
+              "title": "用工具呼叫與 JSON Schema 強制結構化輸出",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.3/tool-calls-json-schema.svg",
+                "data/zh-TW/claude/ccar-f/4.3/tool-response-missing-values.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.3/tool-calls-json-schema.html"
+            },
+            {
+              "id": "4.4",
+              "title": "為擷取品質設計驗證、重試與回饋迴圈",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.4/extraction-validation-retries.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.4/extraction-validation-retries.html"
+            },
+            {
+              "id": "4.5",
+              "title": "設計有效率的批次處理策略",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.5/batch-processing-strategies.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.5/batch-processing-strategies.html"
+            },
+            {
+              "id": "4.6",
+              "title": "設計多實例與多輪審查架構",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/4.6/multi-instance-review.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/4.6/multi-instance-review.html"
+            }
+          ]
+        },
+        {
+          "id": "05",
+          "title": "Context、可靠性與人工監督",
+          "description": "處理長互動、不確定性、失敗傳播與人工覆核。",
+          "lessons": [
+            {
+              "id": "5.1",
+              "title": "在長互動中保留關鍵對話資訊",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.1/long-context-retention.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.1/long-context-retention.html"
+            },
+            {
+              "id": "5.2",
+              "title": "設計升級人工與歧義處理模式",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.2/human-escalation-ambiguity.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.2/human-escalation-ambiguity.html"
+            },
+            {
+              "id": "5.3",
+              "title": "在多代理系統中傳播錯誤",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.3/multi-agent-error-propagation.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.3/multi-agent-error-propagation.html"
+            },
+            {
+              "id": "5.4",
+              "title": "在大型程式庫探索中管理 Context",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.4/large-codebase-context.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.4/large-codebase-context.html"
+            },
+            {
+              "id": "5.5",
+              "title": "設計人工審查流程與信心校準",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.5/human-review-calibration.svg",
+                "data/zh-TW/claude/ccar-f/5.5/human-review-routing-high-confidence-sampling.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.5/human-review-calibration.html"
+            },
+            {
+              "id": "5.6",
+              "title": "保留資訊來源並處理多來源不確定性",
+              "figures": [
+                "data/zh-TW/claude/ccar-f/5.6/source-traceability-uncertainty.svg",
+                "data/zh-TW/claude/ccar-f/5.6/many-to-many-claim-source-mapping.svg"
+              ],
+              "page": "data/zh-TW/claude/ccar-f/5.6/source-traceability-uncertainty.html"
+            }
+          ]
+        }
+      ],
+      "lessonCount": 30
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5ef">
+  <meta name="description" content="用圖解與完整筆記，循序學習跨領域知識。">
+  <title>知識圖譜｜Learn with Graph</title>
+  <link rel="stylesheet" href="./style.css?v=3">
+  <script defer src="./app.js?v=3"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="返回首頁"><span class="brand-mark">✳</span><span>知識圖譜<small>LEARN WITH GRAPH</small></span></a>
+    <nav class="topnav" aria-label="主選單"><a href="#/" id="nav-home">探索課程</a><a href="#/zh-TW/claude/ccar-f" id="nav-course">學習路徑</a></nav>
+    <div class="top-actions"><label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="搜尋學習單元" aria-label="搜尋學習單元"><kbd>/</kbd></label><button id="menu-toggle" class="menu-toggle" aria-label="開啟章節選單" aria-expanded="false">☰</button></div>
+  </header>
+  <div id="app" class="app-shell"><div class="loading">正在載入學習內容…</div></div>
+  <div id="figure-dialog" class="figure-dialog" role="dialog" aria-modal="true" aria-label="放大圖解" hidden><div class="figure-panel"><div class="figure-toolbar"><div class="figure-zoom"><button id="figure-zoom-out" type="button" aria-label="縮小圖解">−</button><span id="figure-zoom-level">適合視窗</span><button id="figure-zoom-in" type="button" aria-label="放大圖解">＋</button></div><a id="open-figure-original" href="#" target="_blank" rel="noopener noreferrer">開啟原圖 ↗</a><button id="close-figure" class="figure-close" type="button" aria-label="關閉圖解">×</button></div><div id="figure-stage" class="figure-stage"><img alt="放大的圖解"></div></div></div>
+  <footer class="footer"><span>知識圖譜 · Learn with Graph</span><span>從概念到理解，按自己的節奏前進。</span></footer>
+</body>
+</html>

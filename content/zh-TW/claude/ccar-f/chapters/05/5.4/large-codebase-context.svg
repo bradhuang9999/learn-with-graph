@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1160" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">5.4 大型程式庫探索的依賴與恢復</title>
+  <desc id="svg-desc">A 的 RefundService 證據是 B 支付回呼與 C 授權調查的依賴；manifest 保存狀態檔、版本、檢查點和依賴。A 的證據驗錯時 B、C 結論失效，須重驗 A 後重跑。上下文裁切或當機後由 manifest 與短工作筆記恢復。</desc>
+  <style>
+    text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#19354c}
+    .title{font-size:35px;font-weight:700}.subtitle{font-size:19px;fill:#526a7b}.section-bg{fill:#f3f7fa;stroke:#d1dee8;stroke-width:2}.section-title{font-size:24px;font-weight:700}.card-bg{fill:#fff;stroke:#bed1de;stroke-width:2}.card-title{font-size:22px;font-weight:700}.body{font-size:19px}.small{font-size:16px;fill:#52697a}.micro{font-size:15px;fill:#52697a}.flow-line{fill:none;stroke:#3984a0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.flow-line.dependency{stroke:#3a7b92}.flow-line.invalid{stroke:#c4504d;marker-end:url(#arrow-red)}.flow-line.recovery{stroke:#7761a3;marker-end:url(#arrow-purple)}.concept-card:hover .card-bg{stroke:#4782a4;stroke-width:3}.flow-node{cursor:default}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#3984a0"/></marker><marker id="arrow-red" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#c4504d"/></marker><marker id="arrow-purple" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#7761a3"/></marker></defs>
+  <rect width="1500" height="1160" style="fill:#fff"/>
+  <text x="54" y="62" class="title">5.4　探索結果要保留依賴，才能可靠恢復</text>
+  <text x="54" y="98" class="subtitle">局部工作筆記留短證據；全局 manifest 留版本、檢查點和 A→B／C 的依賴。</text>
+
+  <g id="section-dependency" class="section">
+    <rect class="section-bg" x="45" y="136" width="1410" height="495" rx="24"/>
+    <g class="section-content">
+      <text x="74" y="179" class="section-title">探索任務的依賴圖：先驗 A，才可延伸 B／C</text>
+      <path class="flow-line dependency" d="M416 330 H492 V265 H539"/>
+      <path class="flow-line dependency" d="M416 351 H492 V470 H539"/>
+      <path class="flow-line" d="M923 265 H995 V327 H1032"/>
+      <path class="flow-line" d="M923 470 H995 V388 H1032"/>
+      <text x="451" y="242" class="small">依賴 A</text>
+      <text x="451" y="453" class="small">依賴 A</text>
+      <text x="934" y="230" class="small">短狀態回報</text>
+      <g id="concept-investigation-a" class="concept-card flow-node" data-title="A 建立已驗證入口" data-detail="A 在自己的短工作筆記記錄 RefundService.submit、測試位置、檔案行號、觀察版本、已排除路徑和檢查點。這是 B 與 C 的共同起點，不應以 300 行搜尋輸出代替可定位的結論。">
+        <rect class="card-bg" x="74" y="239" width="342" height="221" rx="18" style="fill:#e7f3f7;stroke:#8fb8c8"/>
+        <g class="card-content"><text x="98" y="283" class="card-title">A｜退款流程 · 已驗證</text><text x="98" y="324" class="body">RefundService.submit</text><text x="98" y="360" class="body">＋測試位置／檔案行號</text><text x="98" y="399" class="small">版本 abc123 · checkpoint</text><text x="98" y="428" class="small">短證據寫入 scratchpad</text></g>
+      </g>
+      <g id="concept-investigation-b" class="concept-card flow-node" data-title="B 支付回呼依賴 A" data-detail="B 用 A 核實的 RefundService.submit 入口追支付閘道回呼，自己的狀態檔記錄已驗證入口、未解問題與下一個查詢；目前進行中。">
+        <rect class="card-bg" x="539" y="204" width="384" height="150" rx="18"/>
+        <g class="card-content"><text x="562" y="246" class="card-title">B｜支付回呼 · 進行中</text><text x="562" y="284" class="body">沿 A 的入口追 callback</text><text x="562" y="323" class="small">記錄下一步與未解問題</text></g>
+      </g>
+      <g id="concept-investigation-c" class="concept-card flow-node" data-title="C 授權調查依賴 A" data-detail="C 沿 A 的入口尋找授權檢查，只保留兩個相關候選與待排除項，不把 300 行原始搜尋輸出塞入主代理上下文。">
+        <rect class="card-bg" x="539" y="394" width="384" height="150" rx="18"/>
+        <g class="card-content"><text x="562" y="436" class="card-title">C｜授權檢查 · 進行中</text><text x="562" y="474" class="body">沿 A 的入口查權限</text><text x="562" y="513" class="small">300 行輸出只留 2 個相關命中</text></g>
+      </g>
+      <g id="concept-manifest" class="concept-card flow-node" data-title="協調者的恢復清單" data-detail="manifest 由協調者維護，保存 repository_revision、各題 state_file、status、最後已驗證 checkpoint、observed_revision、evidence_paths 與 depends_on。它指出當機後該讀哪些檔、哪些結果依賴 A；格式由團隊設計，不是 Claude Code 自動建立。">
+        <rect class="card-bg" x="1032" y="239" width="389" height="260" rx="18" style="fill:#eaf7ef;stroke:#92bea4"/>
+        <g class="card-content"><text x="1056" y="282" class="card-title">協調者 manifest</text><text x="1056" y="321" class="body">狀態檔位置＋責任題目</text><text x="1056" y="357" class="body">已驗證 checkpoint＋版本</text><text x="1056" y="393" class="body">evidence_paths＋依賴</text><text x="1056" y="431" class="small">A: done；B/C: in_progress</text><text x="1056" y="461" class="small">B/C: depends_on [A]</text></g>
+      </g>
+      <text x="80" y="586" class="small">子代理各自保管狀態檔；主代理保留架構、進度與短基線，不承受全文搜尋命中。</text>
+    </g>
+  </g>
+
+  <g id="section-invalidation" class="section">
+    <rect class="section-bg" x="45" y="656" width="1410" height="191" rx="24" style="fill:#fff6f4;stroke:#e8c4bf"/>
+    <g class="section-content">
+      <text x="74" y="697" class="section-title" style="fill:#a44340">若 A 的入口驗錯：失效沿依賴向下傳</text>
+      <path class="flow-line invalid" d="M407 771 H510"/>
+      <path class="flow-line invalid" d="M931 771 H1034"/>
+      <g id="concept-a-invalid" class="concept-card flow-node" data-title="A 證據驗錯" data-detail="如果 A 的 RefundService.submit 入口或證據在目前版本被核實為錯誤，A 的已完成標記不能繼續當成可信基線；先定位受影響證據。">
+        <rect class="card-bg" x="74" y="724" width="333" height="99" rx="16" style="fill:#fff;stroke:#d99b94"/>
+        <g class="card-content"><text x="98" y="763" class="card-title">A 證據驗錯</text><text x="98" y="796" class="small">入口或檔案版本不成立</text></g>
+      </g>
+      <g id="concept-descendants-invalid" class="concept-card flow-node" data-title="B 和 C 的推論一併失效" data-detail="manifest 的 depends_on 表明 B、C 都以 A 的入口為前提。A 驗錯時不能只重跑 A，也不可把 B、C 的既有結論拿來綜整；須標失效並重審。">
+        <rect class="card-bg" x="510" y="724" width="421" height="99" rx="16" style="fill:#fff;stroke:#d99b94"/>
+        <g class="card-content"><text x="534" y="763" class="card-title">B／C 結論失效</text><text x="534" y="796" class="small">depends_on A → 不能直接沿用</text></g>
+      </g>
+      <g id="concept-rerun" class="concept-card flow-node" data-title="重驗 A 後重跑受影響支線" data-detail="重新核實 A 的正確入口與版本，把新的短基線注入 B、C，再重跑兩條受影響調查線並更新 manifest；不必無條件重做其他不相干探索。">
+        <rect class="card-bg" x="1034" y="724" width="387" height="99" rx="16" style="fill:#fff;stroke:#d99b94"/>
+        <g class="card-content"><text x="1058" y="763" class="card-title">重驗 A → 重跑 B／C</text><text x="1058" y="796" class="small">更新基線與 manifest</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-recovery" class="section">
+    <rect class="section-bg" x="45" y="873" width="1410" height="221" rx="24"/>
+    <g class="section-content">
+      <text x="74" y="914" class="section-title">探索時持續寫入；壓縮或當機後依持久狀態恢復</text>
+      <path class="flow-line recovery" d="M343 1002 H391"/>
+      <path class="flow-line recovery" d="M714 1002 H762"/>
+      <path class="flow-line recovery" d="M1085 1002 H1133"/>
+      <g id="concept-context-trim" class="concept-card flow-node" data-title="探索期間持續保存短證據" data-detail="探索期間持續把已驗證發現、反證、待查項與來源定位寫入 scratchpad；使用 /compact 前尤其要確認已保存。壓縮釋放當前上下文，不等於跨當機匯出，也不保證逐字保留早期檔案內容。">
+        <rect class="card-bg" x="74" y="946" width="269" height="111" rx="16"/>
+        <g class="card-content"><text x="98" y="985" class="card-title">① 持續存證據</text><text x="98" y="1021" class="small">/compact 前再確認</text></g>
+      </g>
+      <g id="concept-read-manifest" class="concept-card flow-node" data-title="先讀 manifest 找到各調查線" data-detail="恢復時先讀 manifest 的狀態檔位置、已驗證檢查點、依賴與 repository_revision，再讀各代理的 scratchpad；不能只靠對話摘要猜誰完成了什麼。">
+        <rect class="card-bg" x="391" y="946" width="323" height="111" rx="16"/>
+        <g class="card-content"><text x="415" y="985" class="card-title">② 讀 manifest＋筆記</text><text x="415" y="1021" class="small">定位 A／B／C 的檢查點</text></g>
+      </g>
+      <g id="concept-recheck-revision" class="concept-card flow-node" data-title="版本改變就定向核對" data-detail="比對 repository_revision、各 state_file 的 observed_revision 與 evidence_paths。若程式庫已變，只重驗受影響證據及其依賴；狀態檔存在不代表內容仍為最新。">
+        <rect class="card-bg" x="762" y="946" width="323" height="111" rx="16"/>
+        <g class="card-content"><text x="786" y="985" class="card-title">③ 核對版本與證據</text><text x="786" y="1021" class="small">變更時定向重驗依賴</text></g>
+      </g>
+      <g id="concept-inject-baseline" class="concept-card flow-node" data-title="注入有效基線繼續探索" data-detail="把 A 的有效短基線與 B、C 待查問題注入新代理提示，只續跑未完成或已失效的調查；收到結果後更新 manifest 再綜整。">
+        <rect class="card-bg" x="1133" y="946" width="288" height="111" rx="16" style="fill:#eaf7ef;stroke:#92bea4"/>
+        <g class="card-content"><text x="1157" y="985" class="card-title">④ 注入有效基線</text><text x="1157" y="1021" class="small">續跑未完／失效支線</text></g>
+      </g>
+    </g>
+  </g>
+  <text x="54" y="1137" class="micro">工作筆記回答「這條線發現了什麼」；manifest 回答「誰完成、誰依賴誰、現在該重查哪裡」。</text>
+</svg>

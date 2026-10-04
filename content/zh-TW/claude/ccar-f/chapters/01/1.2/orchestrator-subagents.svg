@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2150" role="img" aria-labelledby="title desc">
+<title id="title">1.2 星狀拓撲：先看通訊規則，再看覆蓋檢查</title>
+<desc id="desc">星狀拓撲由中央協調者與獨立分支構成，派工與結果均經中心；以管線和點對點作對照，並用創意產業和客服研究兩個案例區分過窄拆解與來源不可比。</desc>
+<defs>
+ <marker id="arr-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" style="fill:#138b83"/></marker>
+ <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" style="fill:#4474af"/></marker>
+ <marker id="arr-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" style="fill:#c46b35"/></marker>
+</defs>
+<style>
+ text{font-family:'Microsoft JhengHei','Noto Sans TC',sans-serif;fill:#183047}.title{font-size:39px;font-weight:750}.subtitle{font-size:19px;fill:#536b7e}.section-title{font-size:24px;font-weight:700}.head{font-size:22px;font-weight:700}.body{font-size:19px}.small{font-size:16px}.tiny{font-size:14px}.white{fill:#fff}.teal{fill:#0d766e}.blue{fill:#3c679b}.amber{fill:#a95629}.red{fill:#b14842}.muted{fill:#587084}
+ .section-bg{fill:#f5f8fb;stroke:#c9d9e5;stroke-width:2}.card-bg{fill:#fff;stroke:#b7cad9;stroke-width:2}.hub-bg{fill:#dff4ee;stroke:#22978c;stroke-width:4}.spoke-bg{fill:#eaf1fb;stroke:#5e91c6;stroke-width:3}.compare-bg{fill:#fbfcfe;stroke:#d3dfea;stroke-width:2}.danger-bg{fill:#fff0ec;stroke:#e4a79c;stroke-width:2}.warn-bg{fill:#fff3e3;stroke:#e2b378;stroke-width:2}.good-bg{fill:#e9f6ef;stroke:#a4cfb8;stroke-width:2}
+ .flow-line{fill:none;stroke:#138b83;stroke-width:4;marker-end:url(#arr-teal)}.return-line{fill:none;stroke:#4474af;stroke-width:4;marker-end:url(#arr-blue)}.warn-line{fill:none;stroke:#c46b35;stroke-width:4;marker-end:url(#arr-amber)}.topology-line{fill:none;stroke:#6c98aa;stroke-width:4;stroke-linecap:round}.plain-line{fill:none;stroke:#b2c4d1;stroke-width:3}.dash{stroke-dasharray:7 7}.rule{stroke:#d8e3eb;stroke-width:2}
+</style>
+<rect width="1600" height="2150" style="fill:#fff"/>
+<text x="52" y="63" class="title">1.2 星狀拓撲：中心路由，不等於多開幾個 Agent</text>
+<text x="54" y="98" class="subtitle">先辨認通訊結構與取捨，再看協調者如何用「原問題」檢查研究覆蓋</text>
+
+<!-- First layer: generic topology before the example -->
+<g id="section-topology" class="section"><rect class="section-bg" x="48" y="126" width="1504" height="774" rx="22"/><g class="section-content">
+ <text x="76" y="167" class="section-title">① 什麼是星狀拓撲？看誰握有路由權</text>
+ <rect class="compare-bg" x="75" y="187" width="920" height="493" rx="18"/>
+ <text x="102" y="220" class="head teal">樞紐(Hub) 與分支(Spoke)</text><text x="711" y="220" class="small muted">線＝只經中心通訊</text>
+ <g id="concept-question" class="concept-card flow-node" data-title="完整目標" data-detail="原始問題與完成條件先進中央協調者；只有中央能同時追蹤各子題範圍、進度與錯誤。"><rect class="card-bg" x="402" y="235" width="273" height="58" rx="13"/><g class="card-content"><text x="434" y="273" class="body">完整目標與完成條件</text></g></g>
+ <path class="flow-line" d="M539 293 V339"/>
+ <!-- Topology lines show permitted connections; direction is taught below, not overloaded onto four diagonals. -->
+ <path class="topology-line" d="M443 400 L341 347"/>
+ <path class="topology-line" d="M635 401 L741 346"/>
+ <path class="topology-line" d="M447 507 L338 573"/>
+ <path class="return-line" d="M744 574 L631 506"/>
+ <text x="593" y="578" class="tiny blue">草稿回中心核對</text>
+ <g id="concept-hub" class="concept-card flow-node" data-title="中央協調者" data-detail="中央協調者持有主計畫、原問題、各分支進度與錯誤。它拆解任務、選擇分支、收集並驗證結果、針對缺口補派；所有跨分支訊息都由它仲介。"><circle class="card-bg hub-bg" cx="539" cy="450" r="108"/><g class="card-content"><text x="479" y="432" class="head teal">協調者</text><text x="464" y="467" class="small">原問題 · 進度</text><text x="473" y="495" class="small">核對覆蓋 · 錯誤</text></g></g>
+ <g id="concept-spoke-a" class="concept-card flow-node" data-title="獨立分支 A" data-detail="分支只收到被指派子題所需的上下文與工具；不自動繼承中央或其他代理的完整對話。"><circle class="card-bg spoke-bg" cx="282" cy="316" r="66"/><g class="card-content"><text x="248" y="312" class="head">分支 A</text><text x="250" y="340" class="small">搜尋</text></g></g>
+ <g id="concept-spoke-b" class="concept-card flow-node" data-title="獨立分支 B" data-detail="每條分支各自工作、回報結果與來源；若需要另一分支資料，必須由協調者明確交接。"><circle class="card-bg spoke-bg" cx="800" cy="316" r="66"/><g class="card-content"><text x="766" y="312" class="head">分支 B</text><text x="768" y="340" class="small">查證</text></g></g>
+ <g id="concept-spoke-c" class="concept-card flow-node" data-title="獨立分支 C" data-detail="協調者可按任務需要選擇或不選擇分支；星狀拓撲不要求每次啟動所有代理。"><circle class="card-bg spoke-bg" cx="282" cy="608" r="66"/><g class="card-content"><text x="248" y="604" class="head">分支 C</text><text x="250" y="632" class="small">分析</text></g></g>
+ <g id="concept-spoke-d" class="concept-card flow-node" data-title="獨立分支 D" data-detail="綜整代理也只是受委派的分支。它的草稿須回到協調者，接受原問題與來源覆蓋檢查。"><circle class="card-bg spoke-bg" cx="800" cy="608" r="66"/><g class="card-content"><text x="766" y="604" class="head">分支 D</text><text x="751" y="632" class="small">綜整草稿</text></g></g>
+ <rect class="danger-bg" x="367" y="601" width="345" height="51" rx="12"/><text x="399" y="635" class="body red">分支彼此不直接交換結論</text>
+
+ <rect class="compare-bg" x="1020" y="187" width="505" height="493" rx="18"/>
+ <text x="1047" y="220" class="head">和另外兩種通訊結構對照</text>
+ <g id="concept-pipeline" class="concept-card" data-title="管線" data-detail="管線由代理依固定順序接續：上一階段輸出成為下一階段輸入。適合嚴格相依、可逐段測試的轉換，沒有動態中央覆蓋檢查。"><rect class="card-bg" x="1047" y="241" width="451" height="171" rx="16"/><g class="card-content"><text x="1070" y="279" class="head blue">管線：順序相依</text><circle cx="1124" cy="338" r="25" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><text x="1116" y="345" class="body">A</text><path class="flow-line" d="M1150 338 H1214"/><circle cx="1240" cy="338" r="25" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><text x="1232" y="345" class="body">B</text><path class="flow-line" d="M1266 338 H1330"/><circle cx="1356" cy="338" r="25" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><text x="1348" y="345" class="body">C</text><text x="1070" y="390" class="small muted">A 的輸出才是 B 的輸入</text></g></g>
+ <g id="concept-peer" class="concept-card" data-title="點對點" data-detail="點對點允許代理直接交換訊息，沒有控制所有通訊的單一中央節點。可降低路由延遲與單點故障風險，但整體決策與狀態較難集中稽核。"><rect class="card-bg" x="1047" y="431" width="451" height="221" rx="16"/><g class="card-content"><text x="1070" y="469" class="head blue">點對點：彼此直連</text><path class="plain-line" d="M1150 545 L1276 545 L1213 604Z"/><circle cx="1150" cy="545" r="27" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><circle cx="1276" cy="545" r="27" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><circle cx="1213" cy="604" r="27" style="fill:#e4edfb;stroke:#6897cb;stroke-width:2"/><text x="1142" y="552" class="body">A</text><text x="1268" y="552" class="body">B</text><text x="1205" y="611" class="body">C</text><text x="1328" y="546" class="small muted">沒有中央</text><text x="1328" y="573" class="small muted">稽核點</text></g></g>
+
+ <!-- Routing sequence uses one consistent left-to-right arrow grammar. Only the feedback is a separate return loop. -->
+ <rect x="76" y="698" width="1448" height="109" rx="15" style="fill:#eaf4f3"/>
+ <path class="flow-line" d="M320 737 H349"/><path class="flow-line" d="M585 737 H614"/><path class="flow-line" d="M850 737 H879"/><path class="flow-line" d="M1115 737 H1144"/>
+ <path class="warn-line" d="M1285 766 V788 H475 V766"/>
+ <rect x="693" y="773" width="227" height="27" rx="12" style="fill:#eaf4f3"/><text x="714" y="793" class="small amber">可補查 → 回到②派工</text>
+ <g id="concept-decompose" class="concept-card flow-node" data-title="拆解原問題" data-detail="協調者先確認原問題、必答面向與各支線的完成條件；窄問題可以直接處理。"><rect class="card-bg" x="100" y="710" width="220" height="56" rx="12"/><g class="card-content"><text x="119" y="746" class="body">① 拆解原問題</text></g></g>
+ <g id="concept-dispatch" class="concept-card flow-node" data-title="中心派工" data-detail="由協調者依來源與能力選擇需要的子代理，傳入有界任務、必要背景及完成條件。"><rect class="card-bg" x="365" y="710" width="220" height="56" rx="12"/><g class="card-content"><text x="384" y="746" class="body">② 中心派工</text></g></g>
+ <g id="concept-report" class="concept-card flow-node" data-title="分支回報" data-detail="子代理將結果、來源與錯誤狀態返回協調者，不直接把未驗證結論交給其他分支。"><rect class="card-bg" x="630" y="710" width="220" height="56" rx="12"/><g class="card-content"><text x="649" y="746" class="body">③ 分支回報</text></g></g>
+ <g id="concept-check-coverage" class="concept-card flow-node" data-title="核對覆蓋" data-detail="協調者先驗證各支線輸出，再把綜整結果對回原問題，檢查來源可比性、未覆蓋面向及矛盾。"><rect class="card-bg" x="895" y="710" width="220" height="56" rx="12"/><g class="card-content"><text x="914" y="746" class="body">④ 核對覆蓋</text></g></g>
+ <g id="concept-fill-or-limit" class="concept-card flow-node" data-title="補缺或限縮" data-detail="有具體可查缺口才重新派工並再次聚合；若找不到可比來源，停止無方向重派，交付明確限縮的結論。"><rect class="card-bg" x="1160" y="710" width="250" height="56" rx="12"/><g class="card-content"><text x="1179" y="746" class="body">⑤ 補缺或限縮</text></g></g>
+ <path class="rule" d="M77 818 H1524"/>
+ <text x="86" y="854" class="body teal">得到：集中政策、狀態與錯誤處理，決策鏈容易稽核</text>
+ <text x="807" y="854" class="body amber">付出：樞紐是單點故障、吞吐瓶頸，分支過多會撐大上下文</text>
+ <text x="86" y="883" class="small muted">中心的工作是協調；分支只負責自己收到的有界任務。拓撲說明「誰能傳給誰」，不是保證答案正確。</text>
+</g></g>
+
+<!-- Second layer: a concrete source-comparability test -->
+<g transform="translate(0,100)"><g id="section-case" class="section"><rect class="section-bg" x="48" y="826" width="1504" height="766" rx="22"/><g class="section-content">
+ <text x="76" y="868" class="section-title">② 為何還需要協調者？兩支線都「完成」，仍答不了同一個問題</text>
+ <text x="76" y="899" class="body">原問題：新客服系統能否在同一類團隊降低成本，同時守住回覆品質？</text>
+ <text x="76" y="939" class="small muted">兩份研究的結果是「不同來源的局部觀察」，不是可直接拼接的聯合證據。</text>
+ <path class="rule" d="M75 954 H1525"/>
+ <text x="92" y="995" class="small muted">分支／來源</text><text x="405" y="995" class="small muted">期間</text><text x="635" y="995" class="small muted">研究對象</text><text x="925" y="995" class="small muted">已觀察</text><text x="1240" y="995" class="small muted">缺口</text>
+ <g id="concept-cost-evidence" class="concept-card" data-title="A 的成本證據" data-detail="A 找到 2025 年上千席大型客服中心的成本報告，顯示營運支出下降；建置成本與小團隊同期間完整成本資料仍缺。"><rect class="card-bg" x="75" y="1014" width="1450" height="86" rx="14"/><g class="card-content"><rect x="76" y="1015" width="287" height="84" rx="13" style="fill:#e5f1fa"/><text x="96" y="1052" class="head blue">A｜成本研究</text><text x="96" y="1081" class="small">報告甲</text><text x="405" y="1067" class="body">2025</text><text x="635" y="1067" class="body">上千席大型團隊</text><text x="925" y="1067" class="body teal">營運支出 ↓</text><text x="1240" y="1067" class="body amber">建置成本缺</text></g></g>
+ <g id="concept-quality-evidence" class="concept-card" data-title="B 的品質證據" data-detail="B 找到 2023 年三十席小團隊的品質報告，顯示準確率持平；人工升級率未記錄，且與 A 的來源期間與規模不同。"><rect class="card-bg" x="75" y="1113" width="1450" height="86" rx="14"/><g class="card-content"><rect x="76" y="1114" width="287" height="84" rx="13" style="fill:#eef2fb"/><text x="96" y="1151" class="head blue">B｜品質研究</text><text x="96" y="1180" class="small">報告乙</text><text x="405" y="1166" class="body">2023</text><text x="635" y="1166" class="body">三十席小團隊</text><text x="925" y="1166" class="body teal">準確率持平</text><text x="1240" y="1166" class="body amber">升級率缺</text></g></g>
+ <path class="flow-line" d="M800 1200 V1240"/>
+ <g id="concept-comparability" class="concept-card flow-node" data-title="聯合結論的證據閘門" data-detail="協調者需檢查來源能否支援『同一類團隊、同期間、同時成本下降且品質不降』。此例年份不同、規模不同，成本與品質也各缺重要指標；不能把兩個局部成功拼成聯合結論。"><rect class="danger-bg card-bg" x="180" y="1240" width="1240" height="111" rx="17"/><g class="card-content"><text x="210" y="1281" class="head red">聯合結論閘門：不通過</text><text x="595" y="1281" class="body">期間不同 ×　規模不同 ×　指標不全 ×</text><text x="210" y="1320" class="body">A、B 都回報成功 ≠ 已證明「同一類團隊同時省錢且品質不降」</text></g></g>
+ <path class="warn-line" d="M570 1351 V1390 H438 V1410"/><path class="warn-line" d="M1030 1351 V1390 H1162 V1410"/>
+ <path class="return-line" d="M200 1410 V1374 H160 V1296 H180"/>
+ <text x="217" y="1383" class="small blue">補到新證據 → 回中心再驗</text>
+ <g id="concept-targeted-research" class="concept-card flow-node" data-title="定向補查" data-detail="協調者不是無方向重派，而是要求 A 補同期間小團隊建置與營運成本，要求 B 補相近樣本的人工升級率，取得後再綜整。"><rect class="warn-bg card-bg" x="75" y="1410" width="715" height="115" rx="16"/><g class="card-content"><text x="99" y="1451" class="head amber">有可查來源 → 定向補缺，再綜整</text><text x="99" y="1490" class="body">A 補小團隊完整成本；B 補相近樣本升級率</text></g></g>
+ <g id="concept-limited-answer" class="concept-card flow-node" data-title="限縮結論" data-detail="若找不到同期間、同類團隊的配對證據，停止無方向的重派，只交付目前來源各自支持的有限觀察，並明列無法判定原聯合問題。"><rect class="card-bg" x="810" y="1410" width="715" height="115" rx="16"/><g class="card-content"><text x="834" y="1451" class="head">仍無可比證據 → 限縮結論</text><text x="834" y="1490" class="body">分別報告兩份觀察；不宣稱「同時達標」</text></g></g>
+ <text x="80" y="1562" class="small muted">每條回報應附來源與失敗狀態；覆蓋缺口回到中央路由，不能讓分支私下補寫另一條線的結論。</text>
+</g></g></g>
+
+<g transform="translate(0,100)"><g id="section-choice" class="section"><rect class="section-bg" x="48" y="1617" width="1504" height="112" rx="22"/><g class="section-content">
+ <text x="76" y="1658" class="section-title">③ 何時值得用中心協調？</text>
+ <text x="76" y="1694" class="body">單一短文件 → 直接處理</text><text x="574" y="1694" class="body teal">多來源、分工可驗證、需聯合判斷 → 星狀協調</text>
+ <text x="76" y="1721" class="small muted">分支數要由覆蓋需求決定；多代理會增加交接、核對與中心負載，不是預設品質加成。</text>
+</g></g></g>
+
+<g id="section-narrow-scope" class="section" data-title="過窄拆解的覆蓋陷阱" data-detail="廣題若只派一個類別的子題，所有已派分支成功仍可能漏掉整個必答面向；協調者應回原題核對並定向補派。"><rect class="section-bg" x="48" y="1854" width="1504" height="258" rx="22"/><g class="section-content">
+ <text x="76" y="1895" class="section-title">④ 另一種失敗：拆解時漏掉整類問題</text>
+ <g id="concept-broad-question" class="concept-card flow-node" data-title="廣泛原問題" data-detail="題目要求研究創意產業的就業變化，範圍不只一種媒介。"><rect class="card-bg" x="76" y="1913" width="306" height="112" rx="15"/><g class="card-content"><text x="98" y="1952" class="head">原問題</text><text x="98" y="1987" class="body">創意產業就業變化</text></g></g>
+ <path class="flow-line" d="M382 1969H443"/>
+ <g id="concept-too-narrow" class="concept-card flow-node" data-title="只拆視覺藝術" data-detail="協調者只派插畫、攝影和平面設計；三個任務可以全數成功，但它們只覆蓋視覺藝術。"><rect class="warn-bg card-bg" x="443" y="1913" width="437" height="112" rx="15"/><g class="card-content"><text x="466" y="1952" class="head amber">已派：插畫・攝影・平面設計</text><text x="466" y="1987" class="body">全部完成，但只涵蓋視覺藝術</text></g></g>
+ <path class="warn-line" d="M880 1969H943"/>
+ <g id="concept-missing-domain" class="concept-card flow-node" data-title="整個類別未覆蓋" data-detail="音樂、影視、寫作不在最初的分支清單中；這是協調者拆解範圍不足，不是某個子代理執行失敗。"><rect class="danger-bg card-bg" x="943" y="1913" width="581" height="112" rx="15"/><g class="card-content"><text x="967" y="1952" class="head red">漏掉：音樂・影視・寫作</text><text x="967" y="1987" class="body">分支成功 ≠ 原問題覆蓋完整</text></g></g>
+ <rect class="good-bg" x="76" y="2040" width="1448" height="52" rx="13"/><text x="104" y="2074" class="body teal">協調者回到原題列覆蓋清單 → 補派缺少類別 → 重新綜整並再驗覆蓋</text>
+</g></g>
+</svg>

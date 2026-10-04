@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1180" role="img" aria-label="5.5 分群信心校準：整體準確率陷阱、可靠性圖、驗證步驟與分群門檻">
+<defs><marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#5b7392"/></marker></defs>
+<style>
+text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#193348}.title{font-size:32px;font-weight:700}.subtitle{font-size:18px;fill:#526c7e}.section-title{font-size:22px;font-weight:700}.card-title{font-size:21px;font-weight:700}.body{font-size:19px}.support{font-size:15px}.metric{font-size:34px;font-weight:700}.step-no{font-size:27px;font-weight:700}.section-bg{fill:#f5f8fb;stroke:#dae4ec;stroke-width:2}.card-bg{fill:#fff;stroke:#c8d9e5;stroke-width:2}.flow-line{fill:none;stroke:#5b7392;stroke-width:3;marker-end:url(#arrow)}.axis{stroke:#61758a;stroke-width:2.5}.grid{stroke:#e4eaf0;stroke-width:1}.ideal{stroke:#397e8f;stroke-width:3;stroke-dasharray:9 6}.actual-gap{stroke:#cc6651;stroke-width:2.5;stroke-dasharray:5 4}.tick{font-size:15px;fill:#60788b}.teal{fill:#167869}.coral{fill:#ba503e}.blue{fill:#386e91}.muted{fill:#5b7182}.flow-node .card-bg{fill:#fff}.bar-green{fill:#42a08d}.bar-red{fill:#d8745e}
+</style>
+<rect width="1400" height="1180" style="fill:#fff"/>
+<text x="48" y="58" class="title">5.5　分群校準：高信心，可能只有 0.70 正確</text>
+<text x="48" y="91" class="subtitle">先查每種文件與欄位的實測表現，再決定自動放行門檻</text>
+<g id="section-evidence" class="section"><rect class="section-bg" x="40" y="117" width="1320" height="495" rx="22"/><g class="section-content">
+<text x="64" y="154" class="section-title">同一批資料的兩種讀法</text>
+<g id="concept-overall-illusion" class="concept-card" data-title="整體 97% 掩蓋手寫日期" data-detail="一千筆驗證文件：900 筆電子發票全對，100 筆手寫發票的付款日期只對 70 筆。970/1000 是 97%，卻不能代表手寫日期安全。"><rect class="card-bg" x="64" y="178" width="604" height="408" rx="17"/><g class="card-content">
+<text x="91" y="221" class="card-title">整體數字如何被大群拉高</text>
+<text x="91" y="275" class="metric blue">970 / 1,000</text><text x="356" y="273" class="body">＝ 97% 正確</text>
+<rect x="91" y="306" width="540" height="38" rx="10" style="fill:#e9eff3"/><rect x="91" y="306" width="486" height="38" rx="10" class="bar-green"/><rect x="577" y="306" width="38" height="38" class="bar-green"/><rect x="615" y="306" width="16" height="38" rx="5" class="bar-red"/>
+<circle cx="104" cy="384" r="8" style="fill:#42a08d"/><text x="125" y="391" class="body">電子發票　900 / 900 正確</text><text x="574" y="391" class="support teal">100%</text>
+<circle cx="104" cy="435" r="8" style="fill:#d8745e"/><text x="125" y="442" class="body">手寫付款日期　70 / 100 正確</text><text x="574" y="442" class="support coral">70%</text>
+<path d="M113 473H619" style="stroke:#dce6ec;stroke-width:2"/><text x="91" y="510" class="body coral">手寫日期有 30 / 100 錯，不能沿用整體門檻</text><text x="91" y="543" class="support muted">分開看文件型別 × 欄位 × 樣本數</text>
+</g></g>
+<g id="concept-reliability" class="concept-card" data-title="可靠性圖：對角線下方是過度自信" data-detail="橫軸是模型信心，縱軸是實際準確率；對角線表示兩者相等。點在下方表示實際準確率低於自報信心，即過度自信；上方表示低估。圖中 0.92 信心是示意值，配上正文手寫日期實際準確率 0.70，說明高信心仍可能錯得多。"><rect class="card-bg" x="692" y="178" width="644" height="408" rx="17"/><g class="card-content">
+<text x="719" y="221" class="card-title">可靠性圖｜信心須對照實際答對率</text>
+<line class="grid" x1="789" y1="322" x2="1119" y2="322"/><line class="grid" x1="789" y1="432" x2="1119" y2="432"/><line class="grid" x1="899" y1="267" x2="899" y2="542"/><line class="grid" x1="1009" y1="267" x2="1009" y2="542"/>
+<line class="axis" x1="789" y1="542" x2="1064" y2="542"/><line class="axis" x1="789" y1="542" x2="789" y2="267"/>
+<line class="ideal" x1="789" y1="542" x2="1064" y2="267"/>
+<line class="actual-gap" x1="1042" y1="289" x2="1042" y2="349"/><circle cx="1042" cy="349" r="9" style="fill:#ba503e;stroke:#fff;stroke-width:3"/>
+<text x="880" y="332" class="support teal">上方＝低估信心</text><text x="821" y="486" class="support coral">下方＝過度自信</text><text x="1072" y="286" class="support teal">對角線</text>
+<text x="1080" y="352" class="support coral">手寫日期示意</text><text x="1080" y="377" class="body coral">0.92 → 0.70</text>
+<text x="737" y="267" class="support muted">實際</text><text x="737" y="289" class="support muted">準確率</text><text x="789" y="565" class="tick">0</text><text x="1049" y="565" class="tick">1.0</text><text x="909" y="575" class="body">模型信心 →</text>
+</g></g>
+</g></g>
+<g id="section-process" class="section"><rect class="section-bg" x="40" y="632" width="1320" height="268" rx="22"/><g class="section-content">
+<text x="64" y="669" class="section-title">從信心分數走到可驗證的門檻</text>
+<path class="flow-line" d="M297 788H314"/><path class="flow-line" d="M554 788H571"/><path class="flow-line" d="M811 788H828"/><path class="flow-line" d="M1068 788H1085"/>
+<g id="concept-holdout" class="concept-card flow-node" data-title="保留人類標註驗證集" data-detail="信心是待驗證訊號。先留出由人類核對的資料，用它比較自報信心與實際答對比例。"><rect class="card-bg" x="64" y="696" width="233" height="169" rx="15"/><g class="card-content"><text x="86" y="741" class="step-no blue">1</text><text x="86" y="778" class="card-title">保留驗證集</text><text x="86" y="811" class="body">人類核對答案</text><text x="86" y="838" class="support muted">先有真值，才能校準</text></g></g>
+<g id="concept-segment" class="concept-card flow-node" data-title="按文件型別欄位與信心分組" data-detail="按文件型別、目標欄位與信心區間分組。整體校準即使接近對角線，小群仍可能過度自信。"><rect class="card-bg" x="321" y="696" width="233" height="169" rx="15"/><g class="card-content"><text x="343" y="741" class="step-no blue">2</text><text x="343" y="778" class="card-title">分群</text><text x="343" y="811" class="body">型別 × 欄位 × 信心</text><text x="343" y="838" class="support muted">小群不被大群淹沒</text></g></g>
+<g id="concept-measure" class="concept-card flow-node" data-title="計算各群實際準確率與樣本量" data-detail="每群都需同時報告實際答對比例與樣本數；樣本少時，不能只套整體門檻自動放行。"><rect class="card-bg" x="578" y="696" width="233" height="169" rx="15"/><g class="card-content"><text x="600" y="741" class="step-no blue">3</text><text x="600" y="778" class="card-title">計算證據</text><text x="600" y="811" class="body">準確率 ＋ 樣本量</text><text x="600" y="838" class="support muted">辨認證據薄弱的群</text></g></g>
+<g id="concept-threshold" class="concept-card flow-node" data-title="按風險設門檻" data-detail="先決定業務可容忍的錯誤與審查量，再依各分群的驗證結果設路由門檻；小樣本群不能借整體準確率放行。"><rect class="card-bg" x="835" y="696" width="233" height="169" rx="15"/><g class="card-content"><text x="857" y="741" class="step-no blue">4</text><text x="857" y="778" class="card-title">按風險設門檻</text><text x="857" y="811" class="body">看分群實測錯誤</text><text x="857" y="838" class="support muted">先定容錯，再看分數</text></g></g>
+<g id="concept-revalidate" class="concept-card flow-node" data-title="用未參與調整的保留資料重驗" data-detail="如果原驗證集反覆用於調提示與選門檻，最後另留未參與調整的資料檢查候選路由，避免在同一批樣本上自我證明。"><rect class="card-bg" x="1092" y="696" width="244" height="169" rx="15"/><g class="card-content"><text x="1114" y="741" class="step-no blue">5</text><text x="1114" y="778" class="card-title">新保留資料重驗</text><text x="1114" y="811" class="body">不參與前面調整</text><text x="1114" y="838" class="support muted">避免自我證明</text></g></g>
+</g></g>
+<g id="section-decision" class="section"><rect class="section-bg" x="40" y="920" width="1320" height="220" rx="22"/><g class="section-content">
+<text x="64" y="957" class="section-title">分群決策：同是「高信心」，證據充分程度仍不同</text>
+<g id="concept-electronic-release" class="concept-card" data-title="電子發票欄位可個別評估" data-detail="例中電子發票目標欄位 900/900 正確；仍須在未參與調整的資料中驗證其分群門檻與樣本代表性。手寫日期失準不等於所有電子欄位一律停用。"><rect class="card-bg" x="64" y="982" width="617" height="132" rx="15"/><g class="card-content"><text x="88" y="1023" class="card-title teal">電子發票欄位　可個別評估放行</text><text x="88" y="1062" class="body">例中 900 / 900 正確</text><text x="88" y="1091" class="support muted">仍須用保留資料驗門檻、持續監測</text></g></g>
+<g id="concept-handwritten-review" class="concept-card" data-title="手寫日期暫不放行" data-detail="手寫日期雖可得到高信心分數，但此群只有 12 筆標註，其中 2 筆錯；證據不足且已有高信心錯誤，需人工審查並補代表性標註。"><rect class="card-bg" x="701" y="982" width="635" height="132" rx="15"/><g class="card-content"><text x="725" y="1023" class="card-title coral">手寫日期　暫不自動放行</text><text x="725" y="1062" class="body">12 筆標註有 2 筆錯</text><text x="725" y="1091" class="support muted">先送審、補標註，再以新資料驗證</text></g></g>
+</g></g>
+</svg>

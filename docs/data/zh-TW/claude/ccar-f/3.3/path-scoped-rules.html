@@ -1,0 +1,59 @@
+<h2>原始考綱</h2>
+<p>**Task Statement 3.3：**套用只在符合路徑時載入的規則。</p>
+<h3>知識要求</h3>
+<ul>
+<li><code>.claude/rules/</code> 規則檔可在 YAML frontmatter 的 <code>paths</code> 欄位放入 glob 模式，讓規則按路徑條件啟用。</li>
+<li>只在編輯符合條件的檔案時載入路徑限定規則，可減少不相關上下文與 token 用量。</li>
+<li>當同一規範跨越多個目錄（例如測試檔散布在程式庫各處），glob 路徑規則比目錄層級 <code>CLAUDE.md</code> 更合適。</li>
+</ul>
+<h3>技能要求</h3>
+<ul>
+<li>建立帶有 YAML frontmatter 路徑設定的 <code>.claude/rules/</code> 檔案，例如 <code>paths: [&quot;terraform/**/*&quot;]</code>，使規則只在編輯符合檔案時載入。</li>
+<li>用 glob 模式依檔案類型套用規範，不受目錄位置限制，例如以 <code>**/*.test.tsx</code> 涵蓋全部測試檔。</li>
+<li>規範需套用到程式庫各處的檔案時，選路徑專屬規則，而非子目錄 <code>CLAUDE.md</code>。</li>
+</ul>
+<h2>要點筆記</h2>
+<h3>路徑條件控制的是載入，不是權限</h3>
+<p>路徑規則把「哪條工作慣例適用哪些檔案」寫成可比對的條件。<code>.claude/rules/</code> 中的 Markdown 檔若有 YAML frontmatter <code>paths</code>，就按 glob 路徑模式條件載入；沒有 <code>paths</code> 的規則則無條件載入。它解決的是<strong>指示何時進入上下文</strong>，不是檔案存取權限或規則的強制執行。</p>
+<h3>先依慣例的分布決定載體</h3>
+<table>
+<thead>
+<tr>
+<th>慣例的適用範圍</th>
+<th>合適載體</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整個專案通用</td>
+<td>根專案指示，或無 <code>paths</code> 的主題規則</td>
+<td>不應因路徑漏匹配而缺席。</td>
+</tr>
+<tr>
+<td>集中於一個子樹</td>
+<td>該子目錄 <code>CLAUDE.md</code>，或對應子樹的 <code>paths</code> 規則</td>
+<td>目錄邊界與規則一致，擇一維護即可。</td>
+</tr>
+<tr>
+<td>同類檔案散布多處</td>
+<td><code>.claude/rules/</code> 中的 glob 規則</td>
+<td>一份規則覆蓋多個目錄，不必在每個目錄複製。</td>
+</tr>
+</tbody>
+</table>
+<p>例如元件測試同時存在 <code>apps/</code>、<code>packages/</code> 和 <code>shared/</code>，把規則只放 <code>apps/CLAUDE.md</code> 會漏掉後兩處；放根檔又讓無關任務讀到測試細節。此時可建立 <code>.claude/rules/component-tests.md</code>：</p>
+<pre><code class="language-markdown">---
+paths:
+  - &quot;**/*.test.tsx&quot;
+---
+
+# 元件測試
+變更元件測試時，覆蓋正常互動與至少一個失敗情境；
+沿用相鄰測試的 fixture 命名。
+</code></pre>
+<p><code>**/*.test.tsx</code> 匹配多個目錄下的該類測試檔；<code>terraform/**/*</code> 匹配 Terraform 子樹。可以在 <code>paths</code> 放多個模式，以涵蓋共置測試與共用 fixture 程式等實際受影響檔案。模式太窄會漏載，太廣則增加無關上下文；<code>paths</code> 判斷的是檔案路徑，不是使用者訊息裡是否出現某個檔名。</p>
+<h3>驗證條件真的被觸發</h3>
+<p>依<a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener noreferrer">Claude Code 路徑規則文件</a>，現行路徑規則在 Claude Code 以 <code>Read</code>、<code>Write</code> 或 <code>Edit</code> 接觸匹配檔案時觸發。它不是每次工具呼叫都觸發，也不因提示文字提到路徑就保證載入。YAML 若解析失敗，規則可能被當成無條件規則；不應把「檔案放進 <code>.claude/rules/</code>」誤認為條件已生效。</p>
+<p>可用兩個<strong>獨立新會話</strong>驗證：一個先接觸 <code>apps/web/Button.test.tsx</code>，另一個只接觸不匹配的 <code>apps/web/Button.tsx</code>，再看 <code>/context</code> 中的已載入規則。不要在同一會話先讀匹配檔、再讀不匹配檔後宣稱條件失效；規則一旦進入該會話，上下文不會因下一個檔案不匹配而倒退。必要時用 <code>claude --debug</code> 排查 frontmatter 解析錯誤。</p>
+<p>另一份 <code>.claude/rules/terraform.md</code> 可用 <code>paths: [&quot;terraform/**/*&quot;]</code>，要求修改資源前檢視 <code>terraform plan</code>，並在刪除前取得人工確認。這仍是行為指示：是否真的產生 plan 要看執行證據；若「不得擅自刪除」必須硬性保證，仍需權限或 CI 閘門。<strong>條件載入、實際遵循、技術上阻止越界</strong>是三件不同的事。</p>

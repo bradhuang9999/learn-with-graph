@@ -1,0 +1,12 @@
+{
+  "name": "learn-with-graph",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && python -m http.server 5173 --directory docs"
+  },
+  "devDependencies": {
+    "markdown-it": "^14.1.0"
+  }
+}

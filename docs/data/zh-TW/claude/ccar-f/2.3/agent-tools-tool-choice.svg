@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1220" role="img" aria-label="先由角色權限縮小可用工具，再以 tool_choice 決定本回合的呼叫方式">
+<title>2.3 工具範圍與 tool_choice 的兩層控制</title>
+<defs><marker id="a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1L9 5.5L1 10" style="fill:none;stroke:#327c9e;stroke-width:2;stroke-linejoin:round"/></marker></defs>
+<style>text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#17374b}.title{font-size:34px;font-weight:700}.sub{font-size:18px;fill:#587083}.st{font-size:23px;font-weight:700}.ct{font-size:21px;font-weight:700}.body{font-size:18px}.small{font-size:15px;fill:#536d7e}.mono{font-family:Consolas,'Microsoft JhengHei',monospace;font-size:18px}.panel{fill:#f4f8fb;stroke:#d3e2eb;stroke-width:2}.card{fill:#fff;stroke:#acc9d8;stroke-width:2}.blue{fill:#e8f2f9;stroke:#96bfd3;stroke-width:2}.green{fill:#e9f6ef;stroke:#80bca2;stroke-width:2}.orange{fill:#fff1e7;stroke:#dfa982;stroke-width:2}.line{fill:none;stroke:#327c9e;stroke-width:3;marker-end:url(#a)}.divider{stroke:#cbdde7;stroke-width:2}.accent{fill:#276d90}.warn{fill:#a75635}.good{fill:#24775c}</style>
+<rect width="1440" height="1220" style="fill:#fff"/>
+<text x="50" y="58" class="title">2.3　先限工具權限，再選本回合的呼叫方式</text>
+<text x="50" y="91" class="sub">工具範圍是持續的能力邊界；tool_choice 只決定這一次回合的選擇規則</text>
+<g id="section-two-gates" class="section"><rect class="panel" x="40" y="118" width="1360" height="278" rx="22"/><g class="section-content">
+<text x="66" y="157" class="st">同一個請求先經過兩道不同的閘門</text>
+<g id="concept-role" class="concept-card flow-node" data-title="角色與任務" data-detail="先確認代理職責。擷取代理只需讀文件與抽取事實；彙整代理只需整合已查證結果。"><rect class="card" x="66" y="184" width="242" height="116" rx="15"/><g class="card-content"><text x="88" y="226" class="ct">角色與任務</text><text x="88" y="263" class="body">這個代理負責什麼？</text></g></g>
+<path class="line" d="M308 242H346"/>
+<g id="concept-allowlist" class="concept-card flow-node" data-title="第一層：可見工具集" data-detail="執行層只提供角色完成任務所需的工具；不在清單中的工具無法呼叫。提示中的『不要使用』不能取代此邊界。"><rect class="blue" x="346" y="184" width="286" height="116" rx="15"/><g class="card-content"><text x="368" y="226" class="ct accent">① 可見工具集</text><text x="368" y="263" class="body">能看見／能使用哪些？</text></g></g>
+<path class="line" d="M632 242H670"/>
+<g id="concept-choice" class="concept-card flow-node" data-title="第二層：本回合 tool_choice" data-detail="在已提供的工具中，決定本回合可自由選、必須呼叫任一工具、強制指定工具或禁止呼叫；它不會擴大權限。"><rect class="blue" x="670" y="184" width="330" height="116" rx="15"/><g class="card-content"><text x="692" y="226" class="ct accent">② 本回合 tool_choice</text><text x="692" y="263" class="body">要不要呼叫？指定哪個？</text></g></g>
+<path class="line" d="M1000 242H1038"/>
+<g id="concept-action" class="concept-card flow-node" data-title="合法的下一步" data-detail="模型只能在已提供的工具與本回合選擇約束內行動。any 只保證呼叫某個工具，不能保證它選對。"><rect class="green" x="1038" y="184" width="336" height="116" rx="15"/><g class="card-content"><text x="1060" y="226" class="ct good">合法的下一步</text><text x="1060" y="263" class="body">呼叫工具或直接回答</text></g></g>
+<path class="divider" d="M66 326H1374"/><text x="66" y="361" class="body">例：彙整代理沒有網頁搜尋權；即使 tool_choice 設成 any，也不能把搜尋權限「選」出來。</text>
+</g></g>
+<g id="section-roles" class="section"><rect class="panel" x="40" y="414" width="1360" height="385" rx="22"/><g class="section-content">
+<text x="66" y="452" class="st">第一層｜把工具放進正確角色，不把整份目錄複製給每個人</text>
+<g id="concept-extract" class="concept-card" data-title="擷取代理與窄入口" data-detail="擷取代理可用 load_document 與 extract_data_points。load_document 在後端驗證核准文件網址；不給任意網址 fetch_url，也不給發訊或編輯報告權。"><rect class="card" x="66" y="478" width="397" height="189" rx="16"/><g class="card-content"><text x="89" y="517" class="ct">擷取代理</text><text x="89" y="554" class="mono">load_document</text><text x="89" y="588" class="mono">extract_data_points</text><text x="89" y="637" class="small">驗證文件網址；不給任意 fetch_url</text></g></g>
+<g id="concept-verify" class="concept-card" data-title="查證代理" data-detail="查證代理可查來源並逐項比對主張，但不取得廣泛資料寫入權。"><rect class="card" x="488" y="478" width="397" height="189" rx="16"/><g class="card-content"><text x="511" y="517" class="ct">查證代理</text><text x="511" y="554" class="body">來源查詢 → 逐項比對</text><text x="511" y="588" class="body">輸出證據與不確定性</text><text x="511" y="637" class="small">不持有廣泛寫入權</text></g></g>
+<g id="concept-summarize" class="concept-card" data-title="彙整代理的有限例外" data-detail="彙整代理整合已查證結果；若高頻只需核對一句，可刻意提供窄範圍 verify_fact。完整查證交協調者重新分派。"><rect class="card" x="910" y="478" width="464" height="189" rx="16"/><g class="card-content"><text x="933" y="517" class="ct">彙整代理</text><text x="933" y="554" class="body">整合結果＋窄範圍 verify_fact</text><text x="933" y="588" class="body">完整查證 → 交協調者分派</text><text x="933" y="637" class="small">跨角色例外須高頻、明確且有邊界</text></g></g>
+<g id="concept-tool-bloat" class="concept-card" data-title="工具膨脹的判斷" data-detail="18 個對 4–5 個只是比較案例，不是固定上限。過多或功能重疊的工具增加選擇複雜度與上下文成本；優先精煉描述、刪除閒置項或改成窄工具。"><rect class="orange" x="66" y="691" width="1308" height="82" rx="14"/><g class="card-content"><text x="90" y="727" class="ct warn">工具膨脹不是數字測驗</text><text x="90" y="757" class="body">18 對 4–5 是比較案例；實際檢查：角色是否需要？功能是否重疊？能否改成較窄工具？</text></g></g>
+</g></g>
+<g id="section-choice" class="section"><rect class="panel" x="40" y="817" width="1360" height="360" rx="22"/><g class="section-content">
+<text x="66" y="855" class="st">第二層｜同一角色的下一回合可以換策略，但權限不會放大</text>
+<g id="concept-auto" class="concept-card" data-title="auto" data-detail="可呼叫工具，也可直接回答；當已有證據可能足夠時使用。"><rect class="card" x="66" y="886" width="300" height="135" rx="15"/><g class="card-content"><text x="88" y="926" class="ct">auto</text><text x="88" y="964" class="body">可呼叫／可直接回答</text><text x="88" y="995" class="small">證據可能已足夠</text></g></g>
+<g id="concept-any" class="concept-card" data-title="any" data-detail="必須呼叫已提供工具中的任一個；適合幾個工具都是合理入口的情況。不保證選對，也不會創造清單外工具。"><rect class="card" x="391" y="886" width="300" height="135" rx="15"/><g class="card-content"><text x="413" y="926" class="ct">any</text><text x="413" y="964" class="body">必呼叫某個可見工具</text><text x="413" y="995" class="small">不保證選對工具</text></g></g>
+<g id="concept-specific" class="concept-card" data-title="指定工具" data-detail="固定必經步驟使用指定工具，例如本回合先呼叫 extract_metadata；得到結果後，下一回合重新決定 tool_choice。"><rect class="blue" x="716" y="886" width="333" height="135" rx="15"/><g class="card-content"><text x="738" y="926" class="ct accent">指定工具</text><text x="738" y="964" class="body">先 extract_metadata</text><text x="738" y="995" class="small">下一回合重新決定策略</text></g></g>
+<g id="concept-none" class="concept-card" data-title="none" data-detail="本回合不呼叫工具，只整理已取得結果；這是 API 的補充選項。"><rect class="card" x="1074" y="886" width="300" height="135" rx="15"/><g class="card-content"><text x="1096" y="926" class="ct">none</text><text x="1096" y="964" class="body">本回合不呼叫工具</text><text x="1096" y="995" class="small">只整理已取得結果</text></g></g>
+<path class="divider" d="M66 1048H1374"/><text x="66" y="1084" class="body">固定管線：指定 extract_metadata → 看版本與權限 → 下一回合再開放 load_document／抽取。</text>
+<text x="66" y="1121" class="small">強制模式須確認模型與設定支援；若不支援，就由應用程式先執行必需步驟。提示中的「務必」不是硬保證。</text>
+</g></g>
+</svg>

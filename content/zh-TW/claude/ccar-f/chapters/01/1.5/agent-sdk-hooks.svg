@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1130" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">1.5 用 Agent SDK Hooks 守住工具執行前後</title>
+  <desc id="svg-desc">上方的超額退款示範 PreToolUse 拒絕與另建人工工作單；綠色路徑是符合條件的其他請求，不是同筆 620 美元退款。下方另以訂單或工單結果示範 PostToolUse 按來源正規化，藉 updatedToolOutput 替換模型看到的結果。</desc>
+  <style>
+    text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#18344b}
+    .title{font-size:35px;font-weight:700}.subtitle{font-size:19px;fill:#526a7a}.section-bg{fill:#f4f8fb;stroke:#d0dee8;stroke-width:2}.section-title{font-size:24px;font-weight:700}.lane-label{font-size:17px;font-weight:700}.card-bg{fill:#fff;stroke:#bed0dc;stroke-width:2}.card-title{font-size:23px;font-weight:700}.body{font-size:19px}.small{font-size:16px;fill:#516879}.micro{font-size:15px;fill:#516879}.flow-line{fill:none;stroke:#66879c;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.flow-line.deny{stroke:#c4584e}.flow-line.allow{stroke:#278371}.flow-line.result{stroke:#665ea0}.concept-card:hover .card-bg{stroke:#477ba0;stroke-width:3}.flow-node{cursor:default}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#66879c"/></marker></defs>
+  <rect width="1500" height="1130" style="fill:#fff"/>
+  <text x="52" y="60" class="title">1.5　工具邊界的雙時點：執行前阻擋、回傳後替換</text>
+  <text x="52" y="96" class="subtitle">上方以退款示範前置阻擋；下方以訂單／工單結果示範後置替換。</text>
+
+  <g id="section-pre" class="section">
+    <rect class="section-bg" x="45" y="135" width="1410" height="500" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="176" class="section-title">時點一｜PreToolUse：退款尚未發生</text>
+      <path class="flow-line" d="M360 338 H425"/>
+      <path class="flow-line deny" d="M745 293 H786 V254 H840"/>
+      <path class="flow-line deny" d="M1115 325 V351"/>
+      <path class="flow-line allow" d="M745 389 H786 V548 H840"/>
+      <text x="782" y="233" class="lane-label" style="fill:#a64039">deny</text>
+      <text x="782" y="532" class="lane-label" style="fill:#176f61">合規案</text>
+      <g id="concept-refund-request" class="concept-card flow-node" data-title="待送出的退款請求" data-detail="模型提出 process_refund({amount:620, currency:'USD', customer_id:42})，此時只是工具請求，尚未產生退款副作用。">
+        <rect class="card-bg" x="72" y="265" width="288" height="148" rx="17"/>
+        <g class="card-content"><text x="95" y="307" class="card-title">工具請求</text><text x="95" y="344" class="body">process_refund</text><text x="95" y="378" class="body">620 USD，尚未執行</text></g>
+      </g>
+      <g id="concept-pre-gate" class="concept-card flow-node" data-title="PreToolUse 政策閘門" data-detail="退款工具的 PreToolUse callback 檢查金額、幣別、同幣別政策上限與核准狀態。620 USD 超過 500 USD，回 permissionDecision:deny；金額不可解析、缺幣別或政策未知也不得預設放行。只有所有前置條件通過，工具才執行。">
+        <rect class="card-bg" x="425" y="245" width="320" height="207" rx="17" style="fill:#edf3f8;stroke:#9bb7c9"/>
+        <g class="card-content"><text x="449" y="288" class="card-title">PreToolUse 政策閘門</text><text x="449" y="329" class="body">同幣別上限：500 USD</text><text x="449" y="367" class="body">620 ＞ 500 → deny</text><text x="449" y="412" class="small">缺幣別／政策未知也不放行</text></g>
+      </g>
+      <g id="concept-denied" class="concept-card flow-node" data-title="拒絕後退款未執行" data-detail="Hook 回傳 permissionDecision:deny 與原因，process_refund 不被執行。事後 Hook 無法撤銷已成功的退款，故金額政策必須在工具前檢查。">
+        <rect class="card-bg" x="840" y="204" width="550" height="121" rx="17" style="fill:#fff0ed;stroke:#d89489"/>
+        <g class="card-content"><text x="865" y="247" class="card-title" style="fill:#a64039">process_refund 未執行</text><text x="865" y="286" class="body">回傳拒絕原因；不產生退款副作用</text></g>
+      </g>
+      <g id="concept-human-ticket" class="concept-card" data-title="另建人工工作單" data-detail="拒絕退款不等於已完成人工升級。應用程式另建立可追蹤工作單，交代客戶、金額、幣別、攔截原因與後續核准路徑。">
+        <rect class="card-bg" x="840" y="351" width="550" height="121" rx="17" style="fill:#fff8ea;stroke:#d3b77c"/>
+        <g class="card-content"><text x="865" y="394" class="card-title">另建可追蹤人工工作單</text><text x="865" y="432" class="body">客戶／620 USD／拒絕原因／核准路徑</text></g>
+      </g>
+      <g id="concept-allowed-tool" class="concept-card flow-node" data-title="允許後才執行工具" data-detail="金額與幣別有效、政策可確認且所有前置條件通過時，PreToolUse 允許工具呼叫，執行層才真正呼叫 process_refund。工具若已執行，PostToolUse 只能處理結果，不能逆轉交易。">
+        <rect class="card-bg" x="840" y="495" width="550" height="112" rx="17" style="fill:#eaf7f1;stroke:#8bbfb1"/>
+        <g class="card-content"><text x="865" y="538" class="card-title" style="fill:#176f61">其他合規請求 → 真正執行</text><text x="865" y="576" class="body">例：200 USD 且其餘條件通過；620 USD 仍被拒絕</text></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-post" class="section">
+    <rect class="section-bg" x="45" y="672" width="1410" height="378" rx="24"/>
+    <g class="section-content">
+      <text x="72" y="713" class="section-title">時點二｜PostToolUse：工具已回傳、模型尚未讀取</text>
+      <path class="flow-line result" d="M377 794 H407 V810 H438"/>
+      <path class="flow-line result" d="M377 907 H407 V873 H438"/>
+      <path class="flow-line result" d="M890 832 H950"/>
+      <g id="concept-order-result" class="concept-card flow-node" data-title="甲：訂單工具原始結果" data-detail="訂單工具以 Unix 秒級時間戳回傳 created_at=1764547200；其來源碼表將 status=2 定義為完成。">
+        <rect class="card-bg" x="72" y="746" width="305" height="96" rx="17"/>
+        <g class="card-content"><text x="96" y="777" class="card-title">甲｜訂單工具</text><text x="96" y="807" class="small">秒級時間戳 1764547200</text><text x="96" y="832" class="small">status=2：完成</text></g>
+      </g>
+      <g id="concept-ticket-result" class="concept-card flow-node" data-title="乙：工單工具原始結果" data-detail="工單工具以 ISO 8601 時間字串回傳；其來源碼表將相同的 status=2 定義為待人工。不能以單一全域碼表解碼。">
+        <rect class="card-bg" x="72" y="859" width="305" height="96" rx="17"/>
+        <g class="card-content"><text x="96" y="890" class="card-title">乙｜工單工具</text><text x="96" y="920" class="small">ISO 8601 時間字串</text><text x="96" y="945" class="small">status=2：待人工</text></g>
+      </g>
+      <g id="concept-post-transform" class="concept-card flow-node" data-title="PostToolUse 依各來源規格正規化" data-detail="依工具來源確認時間單位與狀態碼表：訂單秒級時戳 1764547200 轉為 2025-12-01T00:00:00Z；訂單 status=2 是完成，工單 status=2 是待人工。未知 status=9 須保留原碼並標未知；時間單位不明須保留原值與錯誤。">
+        <rect class="card-bg" x="438" y="737" width="452" height="208" rx="17" style="fill:#f1eff9;stroke:#b2a6d4"/>
+        <g class="card-content"><text x="462" y="779" class="card-title" style="fill:#635494">PostToolUse｜依來源規格</text><text x="462" y="817" class="body">秒 → 2025-12-01T00:00:00Z</text><text x="462" y="854" class="body">甲 status=2 → 完成</text><text x="462" y="890" class="body">乙 status=2 → 待人工</text><text x="462" y="922" class="small">未知 9 → 標未知、保留原碼</text></g>
+      </g>
+      <g id="concept-replaced-result" class="concept-card flow-node" data-title="updatedToolOutput 替換後交模型" data-detail="PostToolUse callback 將正規化資料放在 hookSpecificOutput.updatedToolOutput，讓模型實際讀到替換後的工具結果。additionalContext 只是追加上下文，不等於替換原值；較舊 updatedMCPToolOutput 已棄用且只處理 MCP 結果。">
+        <rect class="card-bg" x="950" y="756" width="440" height="169" rx="17" style="fill:#eaf5f7;stroke:#93bdc7"/>
+        <g class="card-content"><text x="974" y="798" class="card-title">updatedToolOutput → 模型</text><text x="974" y="836" class="body">統一欄位，保留不同語意</text><text x="974" y="873" class="small">甲完成 ≠ 乙待人工</text><text x="974" y="902" class="small">additionalContext 不會取代原值</text></g>
+      </g>
+      <text x="80" y="1005" class="body">工具前防止違規動作；工具後整理已發生的結果，不能撤銷退款。</text>
+    </g>
+  </g>
+  <text x="514" y="1100" class="micro">共同邊界：未知政策不放行；未知時間單位或狀態碼不猜測。</text>
+</svg>

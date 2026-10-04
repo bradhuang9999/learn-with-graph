@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1170" role="img" aria-label="3.1 CLAUDE.md 的個人、專案與目錄作用域，以及模組化與載入驗證">
+<title>3.1 指示放在哪裡，決定誰看得到與何時載入</title>
+<defs><marker id="a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1L9 5.5L1 10" style="fill:none;stroke:#327e9b;stroke-width:2;stroke-linejoin:round"/></marker></defs>
+<style>text{font-family:'Microsoft JhengHei','Noto Sans CJK TC',sans-serif;fill:#19374a}.title{font-size:34px;font-weight:700}.sub{font-size:18px;fill:#587083}.st{font-size:23px;font-weight:700}.ct{font-size:21px;font-weight:700}.body{font-size:18px}.small{font-size:15px;fill:#536d7e}.mono{font-family:Consolas,'Microsoft JhengHei',monospace;font-size:18px}.panel{fill:#f4f8fb;stroke:#d2e1ea;stroke-width:2}.card{fill:#fff;stroke:#aec8d8;stroke-width:2}.blue{fill:#e9f3fa;stroke:#9cc2d8;stroke-width:2}.green{fill:#e9f6ef;stroke:#83bfa4;stroke-width:2}.gold{fill:#fff3e6;stroke:#ddb681;stroke-width:2}.line{fill:none;stroke:#327e9b;stroke-width:3;marker-end:url(#a)}.plain{fill:none;stroke:#327e9b;stroke-width:3}.bad{fill:#a45b3f}.good{fill:#287557}.divider{stroke:#d0dfe8;stroke-width:2}</style>
+<rect width="1440" height="1170" style="fill:#fff"/>
+<text x="50" y="58" class="title">3.1　指示放哪裡，決定誰看得到、何時載入</text>
+<text x="50" y="91" class="sub">團隊規則不能只留在個人檔；載入了，也不等於模型必定遵循</text>
+<g id="section-scopes" class="section"><rect class="section-bg panel" x="40" y="118" width="1360" height="385" rx="22"/><g class="section-content">
+<text x="66" y="157" class="st">三層作用域｜同一條「API 變更須跑契約測試」放錯位置，結果不同</text>
+<text x="74" y="206" class="small">檔案位置</text><text x="655" y="206" class="small">誰看得到、何時讀到</text>
+<g id="concept-user" class="concept-card flow-node" data-title="個人 CLAUDE.md" data-detail="~/.claude/CLAUDE.md 只屬於該使用者，跨其專案生效；不隨版本控制分享。團隊規則若只放這裡，新隊友 clone 後讀不到。"><rect class="card-bg gold" x="66" y="220" width="480" height="75" rx="14"/><g class="card-content"><text x="88" y="251" class="ct">個人｜~/.claude/CLAUDE.md</text><text x="88" y="280" class="small">個人偏好；不隨 repo 分享</text></g></g>
+<path class="flow-line line" d="M546 257H617"/>
+<g id="concept-user-effect" class="concept-card flow-node" data-title="僅原維護者有指示" data-detail="維護者本機可看到指示，新隊友的使用者檔沒有這條規則，因此不會因 clone 專案自動取得。"><rect class="card-bg gold" x="617" y="220" width="757" height="75" rx="14"/><g class="card-content"><text x="639" y="252" class="body bad">原維護者可見；新隊友不可見 → 團隊規則放錯層級</text><text x="639" y="279" class="small">不能用這一層作為共享測試要求</text></g></g>
+<g id="concept-project" class="concept-card flow-node" data-title="專案 CLAUDE.md" data-detail="根目錄 CLAUDE.md 或 .claude/CLAUDE.md 擇一，納入版本控制；全團隊使用整庫通用的架構、測試與安全邊界。"><rect class="card-bg blue" x="66" y="311" width="480" height="75" rx="14"/><g class="card-content"><text x="88" y="342" class="ct">專案｜repo/CLAUDE.md</text><text x="88" y="371" class="small">或 repo/.claude/CLAUDE.md</text></g></g>
+<path class="flow-line line" d="M546 348H617"/>
+<g id="concept-project-effect" class="concept-card flow-node" data-title="共享整庫規則" data-detail="專案檔跟著版本控制給隊友；整庫通用規則可在會話中載入。它仍是模型上下文，不是安全沙箱。"><rect class="card-bg green" x="617" y="311" width="757" height="75" rx="14"/><g class="card-content"><text x="639" y="343" class="body good">維護者與新隊友都可取得整庫規則</text><text x="639" y="371" class="small">共享測試入口、架構邊界與通用慣例</text></g></g>
+<g id="concept-directory" class="concept-card flow-node" data-title="目錄 CLAUDE.md" data-detail="例如 packages/api/CLAUDE.md 保存 API 專屬慣例；在 Claude 讀取該目錄下檔案時按需載入，不應期待未接觸目錄時已生效。"><rect class="card-bg blue" x="66" y="402" width="480" height="75" rx="14"/><g class="card-content"><text x="88" y="433" class="ct">目錄｜packages/api/CLAUDE.md</text><text x="88" y="462" class="small">套件專屬指示</text></g></g>
+<path class="flow-line line" d="M546 439H617"/>
+<g id="concept-directory-effect" class="concept-card flow-node" data-title="接觸目錄才載入" data-detail="API 專屬檔可由團隊共享，但在讀取 API 目錄中的檔案時才按需載入；對前端工作不增加無關指示。"><rect class="card-bg green" x="617" y="402" width="757" height="75" rx="14"/><g class="card-content"><text x="639" y="434" class="body good">團隊共享；接觸 API 目錄時才按需載入</text><text x="639" y="462" class="small">只給相關工作，不把 API 命令塞進前端任務</text></g></g>
+</g></g>
+<g id="section-modules" class="section"><rect class="section-bg panel" x="40" y="521" width="1360" height="252" rx="22"/><g class="section-content">
+<text x="66" y="560" class="st">模組化有兩種選入方式：看「如何選入」</text>
+<g id="concept-import" class="concept-card" data-title="維護者以 @import 明確組裝" data-detail="套件 CLAUDE.md 可用 @../../docs/api-standards.md 明確匯入標準檔，相對路徑以匯入語句所在檔案為基準。匯入仍佔上下文，不是省 token 開關。"><rect class="card-bg card" x="66" y="588" width="633" height="137" rx="16"/><g class="card-content"><text x="90" y="629" class="ct">@import｜維護者明確選入</text><text x="90" y="668" class="mono">@../../docs/api-standards.md</text><text x="90" y="704" class="small">匯入內容仍佔上下文；路徑相對於此 CLAUDE.md</text></g></g>
+<g id="concept-rules" class="concept-card" data-title="按主題與路徑條件選入" data-detail=".claude/rules/ 以 testing.md、api-conventions.md 等按主題維護。無 paths 規則一般載入；設定 paths 才能依檔案路徑條件套用，細節見 3.3。"><rect class="card-bg card" x="725" y="588" width="649" height="137" rx="16"/><g class="card-content"><text x="749" y="629" class="ct">.claude/rules/｜按主題管理</text><text x="749" y="668" class="body">加 paths → 依檔案路徑條件載入</text><text x="749" y="704" class="small">只拆檔、不設條件，無法減少無關上下文</text></g></g>
+<text x="66" y="754" class="small">寫法也要可驗證：例如「修改 API 後執行 pnpm --filter api test:contract；失敗時回報測試名稱」。</text>
+</g></g>
+<g id="section-diagnose" class="section"><rect class="section-bg panel" x="40" y="791" width="1360" height="340" rx="22"/><g class="section-content">
+<text x="66" y="830" class="st">新同事沒有跑契約測試？沿三道證據閘門排查</text>
+<path class="flow-line line" d="M419 940H463"/><path class="flow-line line" d="M879 940H923"/>
+<g id="concept-shared" class="concept-card flow-node" data-title="一：確認共享可見" data-detail="先確認規則與被匯入檔確實已提交版控，且不只放在原維護者個人層。"><rect class="card-bg blue" x="66" y="866" width="353" height="149" rx="16"/><g class="card-content"><text x="88" y="908" class="ct">① 共享可見？</text><text x="88" y="947" class="body">規則與匯入檔進版控</text><text x="88" y="982" class="small">不用原維護者個人檔作證</text></g></g>
+<g id="concept-loaded" class="concept-card flow-node" data-title="二：確認此會話實際載入" data-detail="用 /memory 查看檔案位置；用 /context 的 Memory files 清單核對本會話實際載入的 CLAUDE.md 與規則。"><rect class="card-bg blue" x="463" y="866" width="416" height="149" rx="16"/><g class="card-content"><text x="485" y="908" class="ct">② 此會話載入？</text><text x="485" y="947" class="body">/memory 看位置；/context 看清單</text><text x="485" y="982" class="small">目錄規則須接觸對應檔案</text></g></g>
+<g id="concept-followed" class="concept-card flow-node" data-title="三：檢查具體行為" data-detail="在沒有原維護者個人檔干擾的新會話，以一個 API 修改任務確認契約測試命令是否被執行；已載入也不保證遵循，硬限制應交權限或工具前攔截。"><rect class="card-bg green" x="923" y="866" width="451" height="149" rx="16"/><g class="card-content"><text x="945" y="908" class="ct good">③ 真正遵循？</text><text x="945" y="947" class="body">用 API 修改任務檢查測試</text><text x="945" y="982" class="small">指示不是強制權限；硬限制另設閘門</text></g></g>
+<text x="66" y="1073" class="body">定位錯誤 → 修位置；載入失敗 → 查條件；已載入卻未遵循 → 修具體規則或改用強制控制。</text>
+</g></g>
+</svg>

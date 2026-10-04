@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1400" role="img" aria-labelledby="title desc">
+  <title id="title">2.1 工具介面的三道不同關卡</title>
+  <desc id="desc">同一請求先靠工具描述選能力，再靠輸入結構組引數，最後由後端驗證資料與權限。下方比較重疊描述與具邊界的專用工具。</desc>
+  <style>
+    text{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;fill:#19354c}
+    .title{font-size:38px;font-weight:700}.subtitle{font-size:19px;fill:#526b7e}
+    .section-bg{fill:#f4f8fb;stroke:#ccdae5;stroke-width:2}.section-title{font-size:24px;font-weight:700}
+    .card-bg{fill:#fff;stroke:#b4c9d8;stroke-width:2}.card-title{font-size:23px;font-weight:700}
+    .body{font-size:19px}.small{font-size:16px;fill:#526c7d}
+    .blue{fill:#e8f2fc;stroke:#87afd4}.mint{fill:#e7f5ef;stroke:#7fbda4}.amber{fill:#fff3e4;stroke:#d8aa75}.red{fill:#fff0ed;stroke:#d99185}
+    .flow-line{fill:none;stroke:#287e9e;stroke-width:3;marker-end:url(#arrow)}.flow-trunk{fill:none;stroke:#287e9e;stroke-width:3}
+  </style>
+  <defs><marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 10 5 0 10Z" style="fill:#287e9e"/></marker></defs>
+  <rect width="1440" height="1400" style="fill:#fff"/>
+  <text x="48" y="60" class="title">2.1 工具介面：選對工具 ≠ 引數正確 ≠ 獲准執行</text>
+  <text x="48" y="94" class="subtitle">描述負責路由；輸入結構負責形狀；後端才確認真實資料與權限</text>
+
+  <g id="section-three-gates" class="section">
+    <rect class="section-bg" x="40" y="126" width="1360" height="525" rx="22"/>
+    <g class="section-content">
+      <text x="68" y="169" class="section-title">同一請求須依序通過三道不同關卡</text>
+      <g id="concept-request" class="concept-card flow-node" data-title="使用者請求" data-detail="例：查詢客戶 42 的訂單。請求意圖先決定能力，不能直接以關鍵字或工具名稱假定可執行。">
+        <rect class="card-bg" x="68" y="191" width="1304" height="64" rx="14"/>
+        <g class="card-content"><text x="91" y="232" class="body">使用者：「查客戶 42 的訂單」　→　模型提出工具與引數　→　執行端最後決定是否可執行</text></g>
+      </g>
+      <path class="flow-line" d="M464 365 H534"/>
+      <path class="flow-line" d="M906 365 H976"/>
+      <g id="concept-description" class="concept-card flow-node" data-title="第一關：工具描述" data-detail="描述要說明做什麼、何時用、何時不用，以及預期輸入與輸出。它幫模型從相鄰工具中選擇，不提供存取權。">
+        <rect class="card-bg blue" x="68" y="287" width="396" height="179" rx="18"/>
+        <g class="card-content">
+          <text x="91" y="329" class="card-title">① 描述：該選哪個工具？</text>
+          <text x="91" y="367" class="body">做什麼 · 何時用 · 何時不用</text>
+          <text x="91" y="405" class="body">例：依客戶 ID 查訂單</text>
+          <text x="91" y="438" class="small">不查公開網頁、不修改訂單</text>
+        </g>
+      </g>
+      <g id="concept-input-schema" class="concept-card flow-node" data-title="第二關：輸入結構" data-detail="宣告 customer_id 的型別、格式與必要性；from_date 若可安全預設則選用。結構合格仍不能證明 ID 真實。">
+        <rect class="card-bg amber" x="534" y="287" width="372" height="179" rx="18"/>
+        <g class="card-content">
+          <text x="557" y="329" class="card-title">② 結構：引數怎麼組？</text>
+          <text x="557" y="367" class="body">customer_id：必要</text>
+          <text x="557" y="405" class="body">from_date：可選＋預設值</text>
+          <text x="557" y="438" class="small">型別與格式 ≠ 事實正確</text>
+        </g>
+      </g>
+      <g id="concept-backend" class="concept-card flow-node" data-title="第三關：後端驗證" data-detail="執行端核對 ID 是否存在、呼叫者是否獲授權、請求是否符合業務規則；描述與 schema 都不能替代這一步。">
+        <rect class="card-bg mint" x="976" y="287" width="396" height="179" rx="18"/>
+        <g class="card-content">
+          <text x="999" y="329" class="card-title">③ 後端：真的能執行？</text>
+          <text x="999" y="367" class="body">資源存在 · 權限 · 業務規則</text>
+          <text x="999" y="405" class="body">全通過 → 取得訂單結果</text>
+          <text x="999" y="438" class="small">未授權時拒絕，不查其他客戶</text>
+        </g>
+      </g>
+      <g id="concept-gate-failures" class="concept-card" data-title="三種失敗不是同一問題" data-detail="選錯工具是路由問題；引數缺漏是輸入契約問題；格式正確但無權存取是後端權限問題。須在正確邊界修復，不能只增加提示詞。">
+        <rect class="card-bg red" x="68" y="501" width="1304" height="111" rx="16"/>
+        <g class="card-content">
+          <text x="91" y="540" class="card-title">失敗時先定位是哪一關</text>
+          <text x="91" y="577" class="body">描述重疊 → 選錯工具　｜　缺 customer_id → 先取得值　｜　ID 正確但未授權 → 後端拒絕</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="section-disambiguation" class="section">
+    <rect class="section-bg" x="40" y="677" width="1360" height="682" rx="22"/>
+    <g class="section-content">
+      <text x="68" y="719" class="section-title">路由消歧：同是「分析內容」，實際責任可能完全不同</text>
+      <text x="68" y="752" class="small">情境：使用者給公開網址，想抽出三項數字，稍後逐項核對原文</text>
+      <path class="flow-line" d="M368 831 H432"/>
+      <path class="flow-line" d="M802 831 H866"/>
+      <path class="flow-line" d="M1119 880 V917 H915 V956"/>
+      <g id="concept-web-request" class="concept-card flow-node" data-title="公開網址" data-detail="輸入是公開網址。若工具只描述成分析內容，模型可能誤送到本機文件或摘要工具，這正是資料來源邊界不清。">
+        <rect class="card-bg blue" x="68" y="782" width="300" height="98" rx="17"/>
+        <g class="card-content">
+          <text x="91" y="822" class="card-title">輸入｜公開網址</text>
+          <text x="91" y="853" class="body">不是本機文件</text>
+        </g>
+      </g>
+      <g id="concept-web-extract" class="concept-card flow-node" data-title="公開網頁擷取工具" data-detail="extract_web_results 只接受公開網址，回傳主文、標題、網址與段落位置；不讀本機 PDF，也不判斷真偽。">
+        <rect class="card-bg mint" x="432" y="782" width="370" height="98" rx="17"/>
+        <g class="card-content">
+          <text x="455" y="822" class="card-title">extract_web_results</text>
+          <text x="455" y="853" class="body">網址 → 主文與位置</text>
+        </g>
+      </g>
+      <g id="concept-source-packet" class="concept-card flow-node" data-title="可追溯的來源內容" data-detail="擷取結果保留主文、來源網址與段落位置；接下來不同任務可共用這份內容，但不代表三種工具必須固定依序執行。">
+        <rect class="card-bg amber" x="866" y="782" width="506" height="98" rx="17"/>
+        <g class="card-content">
+          <text x="889" y="822" class="card-title">中間產物｜內容＋來源位置</text>
+          <text x="889" y="853" class="body">主文 · 網址 · 段落</text>
+        </g>
+      </g>
+      <g id="concept-intent" class="concept-card flow-node" data-title="按後續需求選工具" data-detail="取得來源後問接下來要列數字、概覽，還是核對一個已提出的主張；三支是條件選擇，不是三個固定先後步驟。">
+        <rect class="card-bg" x="525" y="920" width="390" height="72" rx="15"/>
+        <g class="card-content"><text x="550" y="966" class="card-title">接著要回答哪個問題？</text></g>
+      </g>
+      <path class="flow-trunk" d="M720 992 V1018 H268 M720 1018 H1172"/>
+      <path class="flow-line" d="M268 1018 V1042"/>
+      <path class="flow-line" d="M720 1018 V1042"/>
+      <path class="flow-line" d="M1172 1018 V1042"/>
+      <g id="concept-data-points" class="concept-card flow-node" data-title="需要列出數字" data-detail="extract_data_points 接受已取得內容、來源識別與欲擷取欄位，回傳數值、單位與原文位置；不自行補不存在的數字，也不查證真偽。">
+        <rect class="card-bg blue" x="68" y="1042" width="400" height="142" rx="17"/>
+        <g class="card-content">
+          <text x="91" y="1083" class="card-title">要列數字｜extract_data_points</text>
+          <text x="91" y="1119" class="body">內容＋欄位 → 數值、單位、位置</text>
+          <text x="91" y="1152" class="small">不判斷數字是否屬實</text>
+        </g>
+      </g>
+      <g id="concept-summary" class="concept-card flow-node" data-title="只需要概覽" data-detail="summarize_content 接受已取得內容與摘要目的，回傳摘要及涵蓋範圍；不取代逐項引用，也不自行擷取未知網頁。">
+        <rect class="card-bg amber" x="520" y="1042" width="400" height="142" rx="17"/>
+        <g class="card-content">
+          <text x="543" y="1083" class="card-title">只要概覽｜summarize_content</text>
+          <text x="543" y="1119" class="body">內容＋目的 → 摘要與範圍</text>
+          <text x="543" y="1152" class="small">摘要不取代可追溯證據</text>
+        </g>
+      </g>
+      <g id="concept-verify" class="concept-card flow-node" data-title="已有具體待查主張" data-detail="verify_claim_against_source 接受具體主張、來源識別與原文位置，回傳支持、反駁或證據不足及所據位置；無法讀取來源時明示失敗。">
+        <rect class="card-bg mint" x="972" y="1042" width="400" height="142" rx="17"/>
+        <g class="card-content">
+          <text x="995" y="1083" class="card-title">有主張才查證</text>
+          <text x="995" y="1119" class="small">verify_claim_against_source</text>
+          <text x="995" y="1152" class="body">主張＋原文 → 判斷與證據</text>
+        </g>
+      </g>
+      <g id="concept-prompt-conflict" class="concept-card" data-title="關鍵字式系統提示造成錯路由" data-detail="若系統提示仍寫著凡遇到分析一律呼叫 analyze_document，就會與新工具描述衝突。應改按資料型態、任務階段與例外條件指路，再以正例、反例、曖昧例測試。">
+        <rect class="card-bg red" x="68" y="1215" width="1304" height="96" rx="17"/>
+        <g class="card-content">
+          <text x="91" y="1251" class="card-title">提示衝突：見「分析」就用 analyze_document → 可能把網址錯送文件摘要</text>
+          <text x="91" y="1284" class="body">改按資料型態、任務階段與例外選工具；三支可選，不是固定管線</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

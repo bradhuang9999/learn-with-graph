@@ -1,0 +1,327 @@
+{
+  "course": "claude/ccar-f",
+  "locale": "zh-TW",
+  "note": "Original filenames are historical; source files were byte-identical to content files when removed.",
+  "entries": [
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.1 設計與實作自主執行的 Agent 迴圈.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.1/agentic-loop.svg",
+      "sha256": "4425a6969942b8b97381b82a9e125ccf0afe4c4dd42940beff9618a9c503e2e7"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.2 以協調者與子代理模式編排多 Agent 系統.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.2/orchestrator-subagents.svg",
+      "sha256": "82350000a37a94db8749c9652c71e13f706fcad17217ce0e46bd6716c58611be"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.3 設定子代理呼叫、上下文傳遞與生成.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.3/subagent-handoffs.svg",
+      "sha256": "19f2e53d0a9015d2f35ae307d37c126200d5ccec22ac4c00a3b8c10f0715171d"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.3-2 平行研究到可追溯綜整.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.3/parallel-research-traceable-synthesis.svg",
+      "sha256": "33cc1e900d72fa3c96d86d1869769460ae24e1f8e51ed47c8f639e8ae3b8ae57"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.4 多步工作流程的強制執行與交接.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.4/workflow-enforcement-handoffs.svg",
+      "sha256": "15a31b32795019a06d3afa3a21f63cb67203f9e58ffde77137c7e370ff3920c9"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.5 用 Agent SDK Hooks 攔截工具呼叫並正規化資料.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.5/agent-sdk-hooks.svg",
+      "sha256": "2a2ad8363b132ea1668e14802e8541279164c622b7258bb2e4558b7dcec81d78"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.6 設計複雜工作的任務拆解策略.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.6/task-decomposition.svg",
+      "sha256": "166422ec6d4a01e7b9671f361899c4a8d44f5134938eaacddba1934b11ba43e4"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第01章/1.7 管理工作階段狀態、續接與分叉.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.7/session-state-resume-fork.svg",
+      "sha256": "47602d14e61e30406a47ca7282dc31897f5cceb5ea83fbd609187600e9dcc0ed"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第02章/2.1 設計描述清晰且邊界明確的工具介面.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.1/tool-interface-design.svg",
+      "sha256": "aef04649613aea36d7261296cc8fff0024420b8b0828881b475be512c5539b85"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第02章/2.2 為 MCP 工具實作結構化錯誤回應.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.2/mcp-structured-errors.svg",
+      "sha256": "258e724553513c95a782ad8f2122e6300ad7bca61e7c66f6fff085bd7cc8f86c"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第02章/2.3 分配代理工具並設定工具選擇.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.3/agent-tools-tool-choice.svg",
+      "sha256": "1823c5f80a00f0386187950313cbdff2b7756630a0a4d233e7bfa8523901bcb7"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第02章/2.4 將 MCP Server 整合進 Claude Code 與 Agent 工作流程.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.4/mcp-integration-workflows.svg",
+      "sha256": "ce0636a88ef2ff11d833f99ec6a67e0402bbbd11894c0bca6cb2d46963cdbedf"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第02章/2.5 有效選用 Read、Write、Edit、Bash、Grep、Glob.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.5/claude-code-tool-selection.svg",
+      "sha256": "138f073750743d398388911aff5fd1de859056be88e685fe9d9820e0e9491bea"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.1 設定 CLAUDE.md 的層級、範圍與模組化.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.1/claude-md-hierarchy.svg",
+      "sha256": "3ad600024bae22f2e79c95b47f4865e38c663751c4ff8d0e43f4f850613d84e6"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.2 建立並設定自訂斜線指令與技能.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.2/custom-commands-skills.svg",
+      "sha256": "b6f492eb5610101a29938ef655f0f53909d80871fcf5e4958f14dff199da228f"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.3 套用按路徑條件載入的規則.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.3/path-scoped-rules.svg",
+      "sha256": "15c56b94822df068beee48852c3d1ed88f69f97d5318d00d9043a52e46cc55b1"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.4 判斷計畫模式與直接執行的使用時機.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.4/plan-vs-direct-execution.svg",
+      "sha256": "fe5cb6525f585c219ef2e150a50288b8a565cc10f9f60b50ed11fee97e28418b"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.5 用反覆修正逐步提高品質.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.5/iterative-improvement.svg",
+      "sha256": "f4e0ce6a2fe4be1bf010d962363060ca73150d6ad34ac55c1d57b6c8cd836f27"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第03章/3.6 將 Claude Code 整合至 CI 與 CD.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.6/claude-code-ci-cd.svg",
+      "sha256": "b75a9086178d9fbfbf063ce8ed82ca5d2f3de9546821141de9dba9d07d9ef282"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.1 用明確標準提高精確度並減少誤報.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.1/precision-false-positives.svg",
+      "sha256": "50a22270fb72a8a2cb4311334c1b2b5382e4e5eaea6a74bdd509d953dcf1272f"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.2 以少樣本範例改善一致性與品質.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.2/few-shot-examples.svg",
+      "sha256": "01e79c8482105516c10bc2e7f1202b55a3218701225aad63aa1e8a8eb7a54ce3"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.3 用工具呼叫與 JSON Schema 強制結構化輸出.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.3/tool-calls-json-schema.svg",
+      "sha256": "6bc96aae11e09f368883e73773bc4164aac9ac90981a571788005a93e81634be"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.3-2 工具回應與缺值契約.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.3/tool-response-missing-values.svg",
+      "sha256": "20492906e9802a003127820ff95a828fe1574309a169b6c53f778cd8dc739b7a"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.4 為擷取品質設計驗證、重試與回饋迴圈.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.4/extraction-validation-retries.svg",
+      "sha256": "f2c76e6529b820b063cb6f5020c6dcb9183526f02ad8d3eaa184ccfdd2f8dce0"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.5 設計有效率的批次處理策略.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.5/batch-processing-strategies.svg",
+      "sha256": "bae16e35526938450a6e45bd3d8805e3858b19efacf20cb2cd8fc964ad3bebca"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第04章/4.6 設計多實例與多輪審查架構.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.6/multi-instance-review.svg",
+      "sha256": "860c7a57618d3dced4ee7d9f04be5a85d0be2ff8bd3b3b38a2eaae3b58e45a14"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.1 在長互動中保留關鍵對話資訊.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.1/long-context-retention.svg",
+      "sha256": "1c80943d4af5942462e35e76012a307fc4ba856aa846ed3797e717f998c1285f"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.2 設計升級人工與歧義處理模式.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.2/human-escalation-ambiguity.svg",
+      "sha256": "622fc07aacb88e4068ece94cc5103fdd2e25929d35d93d62bc5109046a72f6a6"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.3 在多代理系統中傳播錯誤.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.3/multi-agent-error-propagation.svg",
+      "sha256": "2839a93925922b5eb70f0da659db1f4302e29e9ea9d304406017d79107a948b7"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.4 在大型程式庫探索中管理 Context.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.4/large-codebase-context.svg",
+      "sha256": "99dfbcdecd9d29bfc4d531333a76fb2ed0c845941f8e395abab383dac6c04bc1"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.5 設計人工審查流程與信心校準.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.5/human-review-calibration.svg",
+      "sha256": "ba7de9378ba9c5c9dbc6bc429e6970e9d45214d8002d20cac4856ad243892641"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.5-2 人工審查路由與高信心抽樣.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.5/human-review-routing-high-confidence-sampling.svg",
+      "sha256": "21255e273779d075647a2d717e2fdae9a70f6a3f07d68ee58880ce86b76fc74c"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.6 保留資訊來源並處理多來源不確定性.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.6/source-traceability-uncertainty.svg",
+      "sha256": "7073d962e4354c24c2536ae8c07566dc60456d759568020ffa699422e982aa0e"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points-svg/第05章/5.6-2 主張與來源的多對多映射.svg",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.6/many-to-many-claim-source-mapping.svg",
+      "sha256": "ae9c261e44270c507945247bc7c024def01a73029c16f228cf72c9bab2bf5bc2"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.1 設計與實作自主執行的 Agent 迴圈.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.1/agentic-loop.md",
+      "sha256": "9a3ed98cbf14e0b3e917e754cbc2bd37b29305dde896049bf76fd42687489a27"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.2 以協調者與子代理模式編排多 Agent 系統.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.2/orchestrator-subagents.md",
+      "sha256": "a7a667259334bd93e451a7d8466774fb92c526646f05b1f7fe51f5dbf283c88b"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.3 設定子代理呼叫、上下文傳遞與生成.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.3/subagent-handoffs.md",
+      "sha256": "8d94dee3f49faad109e726804232b342641708d75b36c5ea1d5c49d7a159758a"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.4 多步工作流程的強制執行與交接.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.4/workflow-enforcement-handoffs.md",
+      "sha256": "e1e6dcc11ff3b651c02d7ed20043f466b0175cd0f0a4f73e8194c847392418bd"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.5 用 Agent SDK Hooks 攔截工具呼叫並正規化資料.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.5/agent-sdk-hooks.md",
+      "sha256": "2364447abef000b2800cd0f0212901390876f3a29a707dedb234fd5dec9d82d9"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.6 設計複雜工作的任務拆解策略.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.6/task-decomposition.md",
+      "sha256": "0c40587766f5023daf707af1c48dfd8637e558d4feecb9c3a781c698e747baff"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第01章/1.7 管理工作階段狀態、續接與分叉.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/01/1.7/session-state-resume-fork.md",
+      "sha256": "dfe754f12f894c9ab465d3fde7b6f20c9f2cff702129c2ba85d27ba93cef9564"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第02章/2.1 設計描述清晰且邊界明確的工具介面.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.1/tool-interface-design.md",
+      "sha256": "3b160be75bec2f5f4785ee83f4dd67139dd78e431210c00bdc73aeda8f98d47d"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第02章/2.2 為 MCP 工具實作結構化錯誤回應.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.2/mcp-structured-errors.md",
+      "sha256": "99a93fe979ce917eea435bed241548d712123f68f06e1f69dd57c3a19ee1ba6e"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第02章/2.3 分配代理工具並設定工具選擇.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.3/agent-tools-tool-choice.md",
+      "sha256": "5240ec9eb33c6207db2fe7c7eb08524d9bdfe5b3601a06d522f6b86204958994"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第02章/2.4 將 MCP Server 整合進 Claude Code 與 Agent 工作流程.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.4/mcp-integration-workflows.md",
+      "sha256": "a115557eeeb9178c673bcdaae4a3e452d980728c96d288fc89f2f74ac664888e"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第02章/2.5 有效選用 Read、Write、Edit、Bash、Grep、Glob.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/02/2.5/claude-code-tool-selection.md",
+      "sha256": "e2325098ae5e5dc8b1cf6ecd99f12762c553f963bdcf55390eef3e3bf79ef007"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.1 設定 CLAUDE.md 的層級、範圍與模組化.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.1/claude-md-hierarchy.md",
+      "sha256": "dc90d35da18508a1bfcc6b5b898a3f01baf24cb7948f629a5e80a2ddd2244eb9"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.2 建立並設定自訂斜線指令與技能.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.2/custom-commands-skills.md",
+      "sha256": "32c0d00131aac19c3987130786d09c671d5d3d98d4811d38e7e81a43e9831bb2"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.3 套用按路徑條件載入的規則.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.3/path-scoped-rules.md",
+      "sha256": "afc8d2303f21ad42bb1b9c4aa17f7644a05885a1297eae83b1d3a1745a9363f3"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.4 判斷計畫模式與直接執行的使用時機.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.4/plan-vs-direct-execution.md",
+      "sha256": "66befb28494e67dae3a472422fb1a561734273df3a6f540f79f457dd80e88c7a"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.5 用反覆修正逐步提高品質.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.5/iterative-improvement.md",
+      "sha256": "682221a38d1a85db1add5985fe3c871b355b061aef3d2fc29a6fa50bdb5829f9"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第03章/3.6 將 Claude Code 整合至 CI 與 CD.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/03/3.6/claude-code-ci-cd.md",
+      "sha256": "593b2444c8be9f3d5660af0f6d26f26d1b70ffb6e6053c22200ab02e40ce859e"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.1 用明確標準提高精確度並減少誤報.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.1/precision-false-positives.md",
+      "sha256": "031f4116919a9a97408ca157796c3450215283a417b1c504c7a94be6154f5f58"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.2 以少樣本範例改善一致性與品質.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.2/few-shot-examples.md",
+      "sha256": "82038bad1220854f59729314c537b2cc379bebf40ec58890ebe4fbae572438d0"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.3 用工具呼叫與 JSON Schema 強制結構化輸出.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.3/tool-calls-json-schema.md",
+      "sha256": "20bf4d4b0acce0b56a3a0e9e3b83b8ceff903c1c43d688c815e1ad84223c529e"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.4 為擷取品質設計驗證、重試與回饋迴圈.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.4/extraction-validation-retries.md",
+      "sha256": "166088d967674ec4aa7dbb32773bdaafa7fa79f492a92652b1c296951e3361a8"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.5 設計有效率的批次處理策略.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.5/batch-processing-strategies.md",
+      "sha256": "3836dd0640b343a102f1ca0fcbe83c8d2e3eb52e68dda35a18afc50de186a815"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第04章/4.6 設計多實例與多輪審查架構.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/04/4.6/multi-instance-review.md",
+      "sha256": "906914b1eaec82905d5762788ef54f209f385e5d5c1b8019c2a8765c392d8424"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.1 在長互動中保留關鍵對話資訊.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.1/long-context-retention.md",
+      "sha256": "a6d119d3f906698341f6f6f70d6f3cf838fb60d5405f4748703e842bc0bbcff4"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.2 設計升級人工與歧義處理模式.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.2/human-escalation-ambiguity.md",
+      "sha256": "513198c9bd28a678dfb50fb260e189e45f76049c34ecb1e451f9931cca95b8e6"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.3 在多代理系統中傳播錯誤.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.3/multi-agent-error-propagation.md",
+      "sha256": "84621d9bf2e8e25ea929e2d007b860512b77de66bd5c80781d7ea6918ea47303"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.4 在大型程式庫探索中管理 Context.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.4/large-codebase-context.md",
+      "sha256": "be46d5c4a7f5d79a21941f28d715f85d567ffdf34ce27c6922ec80a5a6aaf7fa"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.5 設計人工審查流程與信心校準.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.5/human-review-calibration.md",
+      "sha256": "59d159228a85bf7b41bcff86c54f429ec41f6245f0658b9b6bc0733131e28b85"
+    },
+    {
+      "originalPath": "ref/claude/CCAR-F/key-points/第05章/5.6 保留資訊來源並處理多來源不確定性.md",
+      "contentPath": "content/zh-TW/claude/ccar-f/chapters/05/5.6/source-traceability-uncertainty.md",
+      "sha256": "7fbb1c31d3f8563caaaf5b4060e1f7dddca792a6fbe96ffc77afacf5a1557722"
+    }
+  ]
+}
