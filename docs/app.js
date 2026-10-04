@@ -12,10 +12,9 @@ let figureZoom = 1;
 function setFigureZoom(value) {
   figureZoom = Math.max(1, Math.min(3, value));
   const image = figureStage.querySelector('img');
-  figureStage.classList.toggle('zoomed', figureZoom > 1);
   image.style.width = `${figureZoom * 100}%`;
-  image.style.height = figureZoom > 1 ? 'auto' : '100%';
-  document.querySelector('#figure-zoom-level').textContent = figureZoom === 1 ? '適合視窗' : `${Math.round(figureZoom * 100)}%`;
+  image.style.height = 'auto';
+  document.querySelector('#figure-zoom-level').textContent = figureZoom === 1 ? '符合寬度' : `${Math.round(figureZoom * 100)}%`;
   document.querySelector('#figure-zoom-out').disabled = figureZoom === 1;
   document.querySelector('#figure-zoom-in').disabled = figureZoom === 3;
 }
@@ -32,6 +31,8 @@ function openFigure(button) {
   const source = new URL(button.dataset.figure, document.baseURI).href;
   lastFigureTrigger = button;
   setFigureZoom(1);
+  figureStage.scrollTop = 0;
+  figureStage.scrollLeft = 0;
   figureDialog.querySelector('img').src = source;
   figureDialog.querySelector('img').alt = button.querySelector('img')?.alt || '放大的圖解';
   document.querySelector('#open-figure-original').href = source;
